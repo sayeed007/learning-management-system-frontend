@@ -1,15 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
+
+@theme {
+  --font-poppins: "Poppins", sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* Primary Palette */
+  --color-earth-green: #40A578;
+  --color-dark: #1D1E25;
+  --color-white: #FFFFFF;
+
+  /* Greyscale */
+  --color-off-white-1: #F6F6F9;
+  --color-off-white-2: #F4F6F8;
+  --color-off-white-3: #F7F2F4;
+  --color-off-white-4: #DFE3E8;
+  --color-off-white-5: #C4CDD5;
+  --color-grey-1: #919EAB;
+  --color-grey-2: #637381;
+  --color-grey-3: #454F5B;
+
+  /* Alert Colors */
+  --color-info: #4378FF;
+  --color-success: #34B967;
+  --color-warning: #F29C4C;
+  --color-error: #DA5850;
+
+  /* Font Sizes */
+  --text-48: 48px;
+  --text-36: 36px;
+  --text-24: 24px;
+  --text-20: 20px;
+  --text-18: 18px;
+  --text-16: 16px;
+  --text-14: 14px;
+  --text-13: 13px;
+  --text-10: 10px;
+}
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,8 +51,10 @@
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-poppins);
+  }
 }

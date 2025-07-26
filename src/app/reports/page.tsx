@@ -27,6 +27,7 @@ export default function ReportsPage() {
         {
             icon: <TrendingUp className="h-6 w-6 text-blue-600" />,
             title: "Multiple Course Report",
+            name: 'multiple-course',
             description: "Summarized performance and engagement data across multiple courses, helping track overall learning trends and course effectiveness."
         },
         {
@@ -38,6 +39,7 @@ export default function ReportsPage() {
         {
             icon: <Lightbulb className="h-6 w-6 text-orange-600" />,
             title: "Article Overview",
+            name: 'articles',
             description: "A summarized view of the article's viewer count & review."
         }
     ]
@@ -48,17 +50,17 @@ export default function ReportsPage() {
                 {
                     reportTypes.map((report, index) => (
                         <Link href={`/reports/${report.name}`} key={index}>
-                            <Card className="cursor-pointer hover:shadow-md transition-shadow" >
+                            <Card className="cursor-pointer hover:shadow-md transition-shadow h-[135px]">
                                 <CardHeader>
                                     <div className="flex items-start space-x-4" >
                                         <div className="flex-shrink-0 p-3 bg-gray-50 rounded-lg" >
                                             {report.icon}
                                         </div>
-                                        < div className="flex-1" >
+                                        <div className="flex-1" >
                                             <CardTitle className="text-lg font-semibold text-gray-900" >
                                                 {report.title}
                                             </CardTitle>
-                                            < CardDescription className="mt-2 text-sm text-gray-600 leading-relaxed" >
+                                            <CardDescription className="mt-2 text-sm text-gray-600 leading-relaxed" >
                                                 {report.description}
                                             </CardDescription>
                                         </div>

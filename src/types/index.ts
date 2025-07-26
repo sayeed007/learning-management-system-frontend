@@ -44,3 +44,29 @@ export interface LearnerStats {
     inProgress: number;
     completed: number;
 }
+
+
+export interface Course {
+  id: number
+  name: string
+  totalLearners: number
+  yetToStart: number
+  inProgress: number
+  completed: number
+}
+
+export interface Article {
+  id: number
+  name: string
+  totalViewer: number
+  comments: number
+  rating: number
+  yesRating: number
+  noRating: number
+}
+
+export interface ReportStats {
+  total: number
+  published: number
+  unpublished: number
+}

@@ -1,7 +1,7 @@
 // app/reports/individual-learner/page.tsx
 'use client';
 
-import { BackToReport } from '@/components/reports/BackToReport';
+import { GoBackRoute } from '@/components/reports/GoBackRoute';
 import { Button } from '@/components/ui/button';
 import { CustomSelect } from '@/components/ui/CustomSelect';
 import { Download } from 'lucide-react';
@@ -36,7 +36,7 @@ export default function IndividualLearnerReport() {
                 {/* Header */}
                 <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center gap-4">
-                        <BackToReport />
+                        <GoBackRoute />
                         <CustomSelect
                             options={mockLearners}
                             value={selectedLearner}

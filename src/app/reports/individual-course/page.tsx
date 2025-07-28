@@ -1,8 +1,8 @@
 // app/reports/individual-course/page.tsx
 'use client';
 
-import { BackToReport } from '@/components/reports/BackToReport';
-import { StatCard } from '@/components/reports/StatCard';
+import { GoBackRoute } from '@/components/reports/GoBackRoute';
+import { StatsCard } from '@/components/reports/StatsCard';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { CustomSelect } from '@/components/ui/CustomSelect';
@@ -245,7 +245,7 @@ export default function IndividualCourseReportPage() {
             {/* Header */}
             <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-4">
-                    <BackToReport />
+                    <GoBackRoute />
                     <div className="flex items-center gap-2 z-10">
                         {/* Option 0 */}
                         <CustomSelect
@@ -267,25 +267,25 @@ export default function IndividualCourseReportPage() {
 
             {/* Stats Cards */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-                <StatCard
+                <StatsCard
                     iconName={'/icons/TotalLearner.png'}
                     iconAlt="TotalLearner"
                     title="Total Learner"
                     value={courseData.totalLearners}
                 />
-                <StatCard
+                <StatsCard
                     iconName={'/icons/YetToStart.png'}
                     iconAlt="YetToStart"
                     title="Yet to start"
                     value={courseData.yetToStart}
                 />
-                <StatCard
+                <StatsCard
                     iconName={'/icons/InProgress.png'}
                     iconAlt="InProgress"
                     title="In Progress"
                     value={courseData.inProgress}
                 />
-                <StatCard
+                <StatsCard
                     iconName={'/icons/Completed.png'}
                     iconAlt="Completed"
                     title="Completed"

@@ -8,10 +8,10 @@ interface StatsCardProps {
     value: number
 }
 
-export const StatCard = ({ iconName, iconAlt, title, value }: StatsCardProps) => {
+export const StatsCard = ({ iconName, iconAlt, title, value }: StatsCardProps) => {
 
     return (
-        <Card className="p-4 border-off-white-2 shadow-ui">
+        <Card className="p-4">
             <div className="flex items-center gap-3">
                 <div className={`p-3 rounded-lg`}>
                     {iconName &&

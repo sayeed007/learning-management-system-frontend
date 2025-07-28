@@ -27,7 +27,7 @@ export interface Lesson {
     startDate: string;
     timeSpent: string;
     completionPercentage: number;
-    status: 'complete' | 'In Progress' | 'Yet to Start';
+    status: 'Complete' | 'In Progress' | 'Yet to Start';
 }
 
 export interface SummaryStats {
@@ -46,7 +46,7 @@ export interface LearnerStats {
 }
 
 
-export interface Course {
+export interface CourseSummary {
   id: number
   name: string
   totalLearners: number

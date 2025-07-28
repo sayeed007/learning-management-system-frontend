@@ -1,9 +1,8 @@
-import { BackToReport } from '@/components/reports/BackToReport'
-import { StatCard } from '@/components/reports/StatCard'
-import { Badge } from '@/components/ui/badge'
+import { GoBackRoute } from '@/components/reports/GoBackRoute'
+import { StatsCard } from '@/components/reports/StatsCard'
+import { StatusBadge } from '@/components/reports/StatusBadge'
 import { Button } from '@/components/ui/button'
 import { ChevronRight, Download } from 'lucide-react'
-import Image from 'next/image'
 
 export default function MyReportPage() {
     const courses = [
@@ -108,19 +107,13 @@ export default function MyReportPage() {
         }
     ]
 
-    const getStatusBadge = (status: string) => {
-        if (status === "Complete") {
-            return <Badge className="bg-green-100 text-green-800 hover:bg-green-100"> Complete </Badge>
-        }
-        return <Badge className="bg-orange-100 text-orange-800 hover:bg-orange-100"> In Progress </Badge>
-    }
 
     return (
         <div className="space-y-6 bg-white p-4">
             {/* Header */}
             <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-4">
-                    <BackToReport />
+                    <GoBackRoute />
                 </div>
                 <h1 className="text-2xl font-bold text-gray-900"> My Report </h1>
                 <Button className="bg-blue-600 hover:bg-blue-700 text-white font-bold">
@@ -131,28 +124,28 @@ export default function MyReportPage() {
 
             {/* Stats Cards */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <StatCard
+                <StatsCard
                     iconName={'/icons/CourseEnrolled.png'}
                     iconAlt="CourseEnrolled"
                     title="Course Enrolled"
                     value={11}
                 />
 
-                <StatCard
+                <StatsCard
                     iconName={'/icons/YetToStart.png'}
                     iconAlt="YetToStart"
                     title="Yet To Start"
                     value={0}
                 />
 
-                <StatCard
+                <StatsCard
                     iconName={'/icons/InProgress.png'}
                     iconAlt="InProgress"
                     title="In Progress"
                     value={3}
                 />
 
-                <StatCard
+                <StatsCard
                     iconName={'/icons/Completed.png'}
                     iconAlt="Completed"
                     title="Completed"
@@ -186,7 +179,11 @@ export default function MyReportPage() {
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900"> {course.completedDate} </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900"> {course.timeSpent} </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900"> {course.completion} % </td>
-                                        <td className="px-6 py-4 whitespace-nowrap"> {getStatusBadge(course.status)} </td>
+                                        <td className="px-6 py-4 whitespace-nowrap">
+                                            <StatusBadge
+                                                status={course.status}
+                                            />
+                                        </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <Button variant="ghost" size="icon">
                                                 <ChevronRight className="h-4 w-4" />

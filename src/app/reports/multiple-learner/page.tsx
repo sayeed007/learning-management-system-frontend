@@ -1,12 +1,12 @@
 // app/reports/multiple-learner/page.tsx
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { ArrowLeft, Search, Download, ChevronRight, Users, BookOpen, Clock, Play, CheckCircle } from 'lucide-react';
-import { Card } from '@/components/ui/card';
+import { GoBackRoute } from '@/components/reports/GoBackRoute';
+import { StatsCard } from '@/components/reports/StatsCard';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+import { ChevronRight, Download, Search } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 // Mock data
 const mockLearners = [
@@ -154,40 +154,14 @@ export default function MultipleLearnerReport() {
         router.push(`/reports/individual-learner/${learnerId}`);
     };
 
-    const handleExportCSV = () => {
-        // Implement CSV export functionality
-        console.log('Exporting CSV...');
-    };
-
     return (
-        <div className="min-h-screen bg-gray-50/50">
+        <div className="space-y-6 bg-white p-4">
             {/* Header */}
-            <div className="bg-white border-b border-gray-200">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center justify-between h-16">
-                        <div className="flex items-center space-x-4">
-                            <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={() => router.back()}
-                                className="p-2"
-                            >
-                                <ArrowLeft className="h-5 w-5" />
-                            </Button>
-                            <h1 className="text-xl font-semibold text-gray-900">Multiple Learner Report</h1>
-                        </div>
-                        <Button onClick={handleExportCSV} className="bg-blue-600 hover:bg-blue-700">
-                            <Download className="h-4 w-4 mr-2" />
-                            Export as CSV
-                        </Button>
-                    </div>
-                </div>
-            </div>
-
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                {/* Search Bar */}
-                <div className="mb-8">
-                    <div className="relative max-w-md">
+            <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-4">
+                    <GoBackRoute />
+                    {/* Search Bar */}
+                    <div className="relative w-[280px]">
                         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
                         <input
                             type="text"
@@ -198,123 +172,103 @@ export default function MultipleLearnerReport() {
                         />
                     </div>
                 </div>
-
-                {/* Summary Stats */}
-                <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mb-8">
-                    <Card className="p-6">
-                        <div className="flex items-center space-x-3">
-                            <div className="p-2 bg-blue-100 rounded-lg">
-                                <Users className="h-6 w-6 text-blue-600" />
-                            </div>
-                            <div>
-                                <p className="text-sm text-gray-600">Total Learner</p>
-                                <p className="text-2xl font-bold text-gray-900">{summaryStats.totalLearner}</p>
-                            </div>
-                        </div>
-                    </Card>
-
-                    <Card className="p-6">
-                        <div className="flex items-center space-x-3">
-                            <div className="p-2 bg-orange-100 rounded-lg">
-                                <BookOpen className="h-6 w-6 text-orange-600" />
-                            </div>
-                            <div>
-                                <p className="text-sm text-gray-600">Course Enrolled</p>
-                                <p className="text-2xl font-bold text-gray-900">{summaryStats.courseEnrolled}</p>
-                            </div>
-                        </div>
-                    </Card>
-
-                    <Card className="p-6">
-                        <div className="flex items-center space-x-3">
-                            <div className="p-2 bg-yellow-100 rounded-lg">
-                                <Clock className="h-6 w-6 text-yellow-600" />
-                            </div>
-                            <div>
-                                <p className="text-sm text-gray-600">Yet to start</p>
-                                <p className="text-2xl font-bold text-gray-900">{summaryStats.yetToStart}</p>
-                            </div>
-                        </div>
-                    </Card>
-
-                    <Card className="p-6">
-                        <div className="flex items-center space-x-3">
-                            <div className="p-2 bg-purple-100 rounded-lg">
-                                <Play className="h-6 w-6 text-purple-600" />
-                            </div>
-                            <div>
-                                <p className="text-sm text-gray-600">In Progress</p>
-                                <p className="text-2xl font-bold text-gray-900">{summaryStats.inProgress}</p>
-                            </div>
-                        </div>
-                    </Card>
-
-                    <Card className="p-6">
-                        <div className="flex items-center space-x-3">
-                            <div className="p-2 bg-green-100 rounded-lg">
-                                <CheckCircle className="h-6 w-6 text-green-600" />
-                            </div>
-                            <div>
-                                <p className="text-sm text-gray-600">Completed</p>
-                                <p className="text-2xl font-bold text-gray-900">{summaryStats.completed}</p>
-                            </div>
-                        </div>
-                    </Card>
+                <h1 className="text-2xl font-bold text-gray-900">Multiple Learner Report</h1>
+                <div className="flex items-center gap-4">
+                    <Button className="bg-blue-600 hover:bg-blue-700 text-white font-bold">
+                        <Download className="w-4 h-4 mr-2" />
+                        Export as CSV
+                    </Button>
                 </div>
+            </div>
 
-                {/* Learners Table */}
-                <Card className="overflow-hidden">
-                    <div className="overflow-x-auto">
-                        <table className="w-full">
-                            <thead className="bg-gray-50 border-b border-gray-200">
-                                <tr>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">SL</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Learner</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email Address</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Courses Enrolled</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Yet to start</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">In Progress</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Completed</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Completion Percentage</th>
-                                    <th className="px-6 py-3"></th>
-                                </tr>
-                            </thead>
-                            <tbody className="bg-white divide-y divide-gray-200">
-                                {filteredLearners.map((learner, index) => (
-                                    <tr
-                                        key={learner.id}
-                                        onClick={() => handleLearnerClick(learner.id)}
-                                        className="hover:bg-gray-50 cursor-pointer transition-colors"
-                                    >
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{index + 1}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap">
-                                            <div className="flex items-center space-x-3">
-                                                <div className="h-8 w-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
-                                                    <span className="text-white text-sm font-medium">
-                                                        {learner.name.split(' ').map(n => n[0]).join('')}
-                                                    </span>
-                                                </div>
-                                                <div>
-                                                    <p className="text-sm font-medium text-blue-600">{learner.name}</p>
-                                                    <p className="text-xs text-gray-500">| {learner.id}</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{learner.email}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{learner.coursesEnrolled}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{learner.yetToStart}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{learner.inProgress}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{learner.completed}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{learner.completionPercentage}%</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <ChevronRight className="h-5 w-5 text-gray-400" />
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                </Card>
+            {/* Summary Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mb-8">
+                <StatsCard
+                    iconName={'/icons/TotalLearner.png'}
+                    iconAlt="TotalLearner"
+                    title="Total Courses"
+                    value={summaryStats.totalLearner}
+                />
+
+                <StatsCard
+                    iconName={'/icons/CourseEnrolled.png'}
+                    iconAlt="CourseEnrolled"
+                    title="Course Enrolled"
+                    value={summaryStats.courseEnrolled}
+                />
+
+                <StatsCard
+                    iconName={'/icons/YetToStart.png'}
+                    iconAlt="YetToStart"
+                    title="Yet to start"
+                    value={summaryStats.yetToStart}
+                />
+
+                <StatsCard
+                    iconName={'/icons/InProgress.png'}
+                    iconAlt="InProgress"
+                    title="In Progress"
+                    value={summaryStats.inProgress}
+                />
+
+                <StatsCard
+                    iconName={'/icons/Completed.png'}
+                    iconAlt="Completed"
+                    title="Completed"
+                    value={summaryStats.completed}
+                />
+            </div>
+
+            {/* Learners Table */}
+            <div className="overflow-x-auto">
+                <table className="w-full">
+                    <thead className="bg-off-white-2 border-b border-gray-200">
+                        <tr>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">SL</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Learner</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email Address</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Courses Enrolled</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Yet to start</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">In Progress</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Completed</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Completion Percentage</th>
+                            <th className="px-6 py-3"></th>
+                        </tr>
+                    </thead>
+                    <tbody className="bg-white divide-y divide-gray-200">
+                        {filteredLearners.map((learner, index) => (
+                            <tr
+                                key={learner.id}
+                                onClick={() => handleLearnerClick(learner.id)}
+                                className="hover:bg-gray-50 cursor-pointer transition-colors"
+                            >
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{index + 1}</td>
+                                <td className="px-6 py-4 whitespace-nowrap">
+                                    <div className="flex items-center space-x-3">
+                                        <div className="h-8 w-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+                                            <span className="text-white text-sm font-medium">
+                                                {learner.name.split(' ').map(n => n[0]).join('')}
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <p className="text-sm font-medium text-blue-600">{learner.name}</p>
+                                            <p className="text-xs text-gray-500">| {learner.id}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{learner.email}</td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{learner.coursesEnrolled}</td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{learner.yetToStart}</td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{learner.inProgress}</td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{learner.completed}</td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{learner.completionPercentage}%</td>
+                                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <ChevronRight className="h-5 w-5 text-gray-400" />
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
         </div>
     );

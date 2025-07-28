@@ -1,6 +1,5 @@
 // app/reports/multiple-learner/page.tsx
-'use client';
-
+"use client";
 import { GoBackRoute } from '@/components/reports/GoBackRoute';
 import { StatsCard } from '@/components/reports/StatsCard';
 import { Button } from '@/components/ui/button';

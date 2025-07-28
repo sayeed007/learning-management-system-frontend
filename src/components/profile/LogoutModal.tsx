@@ -1,4 +1,4 @@
-'use client'
+"use client"
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 export function LogoutModal({ open, onOpenChange, onConfirm }: { open: boolean, onOpenChange: (v: boolean) => void, onConfirm: () => void }) {
     return (

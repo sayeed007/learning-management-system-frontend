@@ -1,8 +1,12 @@
 "use client";
 import { useState } from "react";
 import dynamic from "next/dynamic";
-// @ts-expect-error: No types for react-quill-new dynamic import
-const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false }) as any;
+import { ComponentType } from 'react';
+// const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false }) as any;
+const ReactQuill = dynamic(() => import("react-quill-new"), {
+    ssr: false
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+}) as ComponentType<any>;
 import "react-quill-new/dist/quill.snow.css";
 
 export default function ArticleEditorPage() {
@@ -18,7 +22,6 @@ export default function ArticleEditorPage() {
                 onChange={e => setTitle(e.target.value)}
             />
             <div className="mb-8">
-                {/* @ts-expect-error: ReactQuill dynamic import type */}
                 <ReactQuill
                     value={content}
                     onChange={setContent}

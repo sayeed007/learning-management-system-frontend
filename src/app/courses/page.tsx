@@ -1,10 +1,11 @@
 "use client";
 import { CourseCard } from "@/components/CourseCard";
 import { CreateCourseModal } from "@/components/CreateCourseModal";
+import { CourseDetails } from "@/types";
 import { useState } from "react";
 
 // Example course type
-const initialCourses = [
+const initialCourses: CourseDetails[] = [
     // Example data, replace with real data or state
     {
         id: "1",
@@ -23,7 +24,7 @@ export default function CoursesPage() {
     const [courses, setCourses] = useState(initialCourses);
     const [showCreate, setShowCreate] = useState(false);
 
-    const handleCreateCourse = (course: any) => {
+    const handleCreateCourse = (course: CourseDetails) => {
         setCourses((prev) => [...prev, { ...course, id: Date.now().toString() }]);
         setShowCreate(false);
     };

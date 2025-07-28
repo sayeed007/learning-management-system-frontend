@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import Image from "next/image";
 
 export function AddThumbnailModal({ open, onOpenChange, onSave }: { open: boolean; onOpenChange: (v: boolean) => void; onSave: (file: File | null) => void }) {
     const [file, setFile] = useState<File | null>(null);
@@ -30,7 +31,11 @@ export function AddThumbnailModal({ open, onOpenChange, onSave }: { open: boolea
                 <div className="mb-6">
                     <div className="font-semibold mb-2">Thumbnail</div>
                     {preview ? (
-                        <img src={preview} alt="Thumbnail preview" className="w-56 h-40 object-cover rounded-xl mb-2" />
+                        <Image
+                            src={preview}
+                            alt="Thumbnail preview"
+                            className="w-56 h-40 object-cover rounded-xl mb-2"
+                        />
                     ) : (
                         <div className="w-56 h-40 bg-off-white-4 rounded-xl flex items-center justify-center mb-2 text-grey-2">No image</div>
                     )}

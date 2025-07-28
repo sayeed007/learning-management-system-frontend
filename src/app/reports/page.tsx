@@ -1,8 +1,6 @@
-import React from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/card'
-import Link from 'next/link'
-import Layout from '@/components/Layout'
 import Image from 'next/image'
+import Link from 'next/link'
+import { Card, CardContent, CardDescription, CardTitle } from '../../components/ui/card'
 
 export default function ReportsPage() {
     const reportTypes = [

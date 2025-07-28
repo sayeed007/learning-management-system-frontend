@@ -1,4 +1,4 @@
-'use client'
+"use client"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import Image from "next/image";
 import React from "react";
@@ -53,6 +53,9 @@ type Notification = {
 };
 
 function NotificationItem({ avatar, icon, message, time }: Notification) {
+
+    console.info(icon);
+
     return (
         <div className="flex items-start gap-4 py-4 border-b last:border-b-0 border-off-white-4">
             {avatar ? (

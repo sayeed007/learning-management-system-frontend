@@ -1,6 +1,5 @@
 // app/reports/individual-learner/[id]/page.tsx
-'use client';
-
+"use client";
 import { GoBackRoute } from '@/components/reports/GoBackRoute';
 import { StatsCard } from '@/components/reports/StatsCard';
 import { StatusBadge } from '@/components/reports/StatusBadge';

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { MoreHorizontal } from "lucide-react";
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
+import Image from "next/image";
 
 export type Article = {
     id: string;
@@ -16,7 +17,11 @@ export function ArticleCard({ article }: { article: Article }) {
 
     return (
         <div className="bg-white rounded-2xl shadow p-4 flex flex-col gap-2 hover:shadow-lg transition relative">
-            <img src={article.thumbnail} alt={article.title} className="h-36 w-full object-cover rounded-xl mb-3" />
+            <Image
+                src={article.thumbnail}
+                alt={article.title}
+                className="h-36 w-full object-cover rounded-xl mb-3"
+            />
             <div className="flex-1">
                 <div className="text-base font-bold text-dark mb-1 line-clamp-2">{article.title}</div>
                 <div className="flex items-center gap-2 text-xs text-grey-2 mb-1">

@@ -1,6 +1,5 @@
 // app/reports/individual-course/page.tsx
-'use client';
-
+"use client";
 import { GoBackRoute } from '@/components/reports/GoBackRoute';
 import { StatsCard } from '@/components/reports/StatsCard';
 import { Badge } from '@/components/ui/badge';
@@ -231,12 +230,12 @@ const courseOptions = [
 
 export default function IndividualCourseReportPage() {
     const [activeTab, setActiveTab] = useState<'lessons' | 'users'>('lessons');
-    const [selectedCourse, setSelectedCourse] = useState('foundation-ui-ux');
+    const [selectedCourse, setSelectedCourse] = useState<string | null>('foundation-ui-ux');
 
 
     const UserAvatar = ({ name, avatar }: { name: string; avatar: string }) => (
         <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-sm font-medium text-blue-600">
-            {avatar}
+            {avatar} {name}
         </div>
     );
 

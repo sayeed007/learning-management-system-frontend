@@ -1,16 +1,38 @@
 import { useState } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 
-export function AdvancedSettingModal({ open, onOpenChange, onSave, initial }: { open: boolean; onOpenChange: (v: boolean) => void; onSave: (settings: any) => void; initial?: any }) {
-    const [rating, setRating] = useState(initial?.rating ?? true);
-    const [comments, setComments] = useState(initial?.comments ?? true);
-    const [views, setViews] = useState(initial?.views ?? true);
-    const [exportEnabled, setExportEnabled] = useState(initial?.exportEnabled ?? true);
+interface AdvancedSettings {
+    rating: boolean;
+    comments: boolean;
+    views: boolean;
+    exportEnabled: boolean;
+}
 
-    const handleSave = () => {
+interface AdvancedSettingModalProps {
+    open: boolean;
+    onOpenChange: (open: boolean) => void;
+    onSave: (settings: AdvancedSettings) => void;
+    initial?: Partial<AdvancedSettings>;
+}
+
+export function AdvancedSettingModal({
+    open,
+    onOpenChange,
+    onSave,
+    initial
+}: AdvancedSettingModalProps) {
+    const [rating, setRating] = useState<boolean>(initial?.rating ?? true);
+    const [comments, setComments] = useState<boolean>(initial?.comments ?? true);
+    const [views, setViews] = useState<boolean>(initial?.views ?? true);
+    const [exportEnabled, setExportEnabled] = useState<boolean>(initial?.exportEnabled ?? true);
+
+    const handleSave = (): void => {
         onSave({ rating, comments, views, exportEnabled });
         onOpenChange(false);
     };
+
+    const handleCheckboxChange = (setter: (value: boolean | ((prev: boolean) => boolean)) => void) =>
+        () => setter((prev: boolean) => !prev);
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
@@ -23,7 +45,12 @@ export function AdvancedSettingModal({ open, onOpenChange, onSave, initial }: { 
                             <div className="font-semibold text-dark">Rating</div>
                             <div className="text-grey-2 text-sm">Allow article rating</div>
                         </div>
-                        <input type="checkbox" checked={rating} onChange={() => setRating(v => !v)} className="accent-info w-6 h-6" />
+                        <input
+                            type="checkbox"
+                            checked={rating}
+                            onChange={handleCheckboxChange(setRating)}
+                            className="accent-info w-6 h-6"
+                        />
                     </div>
                     <div className="flex items-center gap-4">
                         <span className="text-xl">💬</span>
@@ -31,7 +58,12 @@ export function AdvancedSettingModal({ open, onOpenChange, onSave, initial }: { 
                             <div className="font-semibold text-dark">Comments</div>
                             <div className="text-grey-2 text-sm">Allow comments for the readers</div>
                         </div>
-                        <input type="checkbox" checked={comments} onChange={() => setComments(v => !v)} className="accent-info w-6 h-6" />
+                        <input
+                            type="checkbox"
+                            checked={comments}
+                            onChange={handleCheckboxChange(setComments)}
+                            className="accent-info w-6 h-6"
+                        />
                     </div>
                     <div className="flex items-center gap-4">
                         <span className="text-xl">👁️</span>
@@ -39,7 +71,12 @@ export function AdvancedSettingModal({ open, onOpenChange, onSave, initial }: { 
                             <div className="font-semibold text-dark">Article Views</div>
                             <div className="text-grey-2 text-sm">Display article views</div>
                         </div>
-                        <input type="checkbox" checked={views} onChange={() => setViews(v => !v)} className="accent-info w-6 h-6" />
+                        <input
+                            type="checkbox"
+                            checked={views}
+                            onChange={handleCheckboxChange(setViews)}
+                            className="accent-info w-6 h-6"
+                        />
                     </div>
                     <div className="flex items-center gap-4">
                         <span className="text-xl">⬇️</span>
@@ -47,7 +84,12 @@ export function AdvancedSettingModal({ open, onOpenChange, onSave, initial }: { 
                             <div className="font-semibold text-dark">Article export</div>
                             <div className="text-grey-2 text-sm">Allow readers to export article</div>
                         </div>
-                        <input type="checkbox" checked={exportEnabled} onChange={() => setExportEnabled(v => !v)} className="accent-info w-6 h-6" />
+                        <input
+                            type="checkbox"
+                            checked={exportEnabled}
+                            onChange={handleCheckboxChange(setExportEnabled)}
+                            className="accent-info w-6 h-6"
+                        />
                     </div>
                 </div>
                 <div className="flex gap-4 mt-6 justify-end">
@@ -69,4 +111,4 @@ export function AdvancedSettingModal({ open, onOpenChange, onSave, initial }: { 
             </DialogContent>
         </Dialog>
     );
-} 
+}

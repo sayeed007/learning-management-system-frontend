@@ -1,8 +1,7 @@
-'use client'
-import React, { useState } from "react";
-import { NotificationPopover } from "@/components/NotificationPopover";
-import Link from "next/link";
+"use client"
 import { Header } from "@/components/Header";
+import Image from "next/image";
+import { useState } from "react";
 
 const stats = [
     { label: "Total Learner", value: 120, icon: "👤" },
@@ -107,8 +106,12 @@ export default function DashboardPage() {
                         </button>
                         <div className="flex gap-4 overflow-x-auto">
                             {visibleCourses.map((course, idx) => (
-                                <div key={course.title} className="bg-white rounded-xl shadow w-80 min-w-[320px] flex-shrink-0">
-                                    <img src={course.image} alt={course.title} className="rounded-t-xl h-32 w-full object-cover" />
+                                <div key={`${course.title}-${idx}`} className="bg-white rounded-xl shadow w-80 min-w-[320px] flex-shrink-0">
+                                    <Image
+                                        src={course.image}
+                                        alt={course.title}
+                                        className="rounded-t-xl h-32 w-full object-cover"
+                                    />
                                     <div className="p-4">
                                         <div className="flex items-center gap-2 mb-2">
                                             {course.completed && (

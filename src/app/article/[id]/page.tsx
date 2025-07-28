@@ -1,6 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 
 const article = {
     id: "1",
@@ -18,7 +19,11 @@ export default function ArticleDetailPage() {
         <div className="max-w-3xl mx-auto py-10 px-4">
             <button className="mb-4 text-info hover:underline" onClick={() => router.back()}>&larr; Back to Articles</button>
             <div className="bg-white rounded-2xl shadow p-8 mb-8">
-                <img src={article.thumbnail} alt={article.title} className="h-48 w-full object-cover rounded-xl mb-6" />
+                <Image
+                    src={article.thumbnail}
+                    alt={article.title}
+                    className="h-48 w-full object-cover rounded-xl mb-6"
+                />
                 <div className="text-2xl font-bold text-dark mb-2">{article.title}</div>
                 <div className="flex items-center gap-4 text-grey-2 text-sm mb-2">
                     <span>By {article.author}</span>

@@ -1,10 +1,9 @@
-'use client'
-
+"use client"
 import { GoBackRoute } from '@/components/reports/GoBackRoute'
 import { StatsCard } from '@/components/reports/StatsCard'
 import { Button } from '@/components/ui/button'
 import type { Article, ReportStats } from '@/types'
-import { CheckCircle, Clock, Download, FileText } from 'lucide-react'
+import { Download } from 'lucide-react'
 
 // Mock data - replace with your actual data fetching
 const mockData: { stats: ReportStats; articles: Article[] } = {

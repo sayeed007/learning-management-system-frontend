@@ -6,6 +6,9 @@ interface StatusBadgeProps {
 }
 
 export const StatusBadge = ({ status, percentage }: StatusBadgeProps) => {
+
+    console.info(percentage);
+
     switch (status) {
         case 'Complete':
             return <Badge className="bg-green-100 text-green-800 hover:bg-green-100">Complete</Badge>;

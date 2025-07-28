@@ -21,6 +21,45 @@ export interface Course {
     status: 'In Progress' | 'Complete' | 'Yet to Start';
 }
 
+export interface CourseDetails {
+    id?: string;
+    name: string;
+    category: string;
+    description: string;
+    difficulty: string;
+    chapters: number;
+    lessons: number;
+    quizzes: number;
+    image: string;
+}
+
+
+// If you want to be more specific about difficulty levels:
+export interface CourseWithSpecificDifficulty {
+    id: string;
+    name: string;
+    category: string;
+    description: string;
+    difficulty: "Beginner" | "Intermediate" | "Advanced";
+    chapters: number;
+    lessons: number;
+    quizzes: number;
+    image: string;
+}
+
+// If you want to make some fields optional:
+export interface OptionalCourse {
+    id: string;
+    name: string;
+    category: string;
+    description: string;
+    difficulty: string;
+    chapters: number;
+    lessons: number;
+    quizzes?: number; // Optional
+    image?: string;   // Optional
+}
+
 export interface Lesson {
     id: number;
     lesson: string;

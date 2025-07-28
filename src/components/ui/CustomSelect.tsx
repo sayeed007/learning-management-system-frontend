@@ -1,26 +1,65 @@
 import React from 'react';
-import Select from 'react-select';
+import Select, {
+    StylesConfig,
+    GroupBase,
+    SingleValue,
+    MultiValue,
+    ActionMeta,
+    MenuPlacement,
+    MenuPosition
+} from 'react-select';
 
 type SelectOption = {
     value: string;
     label: string;
 };
 
-type CustomSelectProps = {
+type SelectSize = "small" | "medium" | "large";
+type SelectVariant = "default" | "outline" | "filled";
+
+type BaseSelectProps = {
     options?: SelectOption[];
-    value?: string | string[] | null;
-    onChange?: (value: string | string[] | null) => void;
     placeholder?: string;
     isSearchable?: boolean;
     isDisabled?: boolean;
     isLoading?: boolean;
     isClearable?: boolean;
-    isMulti?: boolean;
     className?: string;
     width?: string;
-    size?: "small" | "medium" | "large";
-    variant?: "default" | "outline" | "filled";
+    size?: SelectSize;
+    variant?: SelectVariant;
     error?: boolean;
+    menuPlacement?: MenuPlacement;
+    menuPosition?: MenuPosition;
+};
+
+type SingleSelectProps = BaseSelectProps & {
+    isMulti?: false;
+    value?: string | null;
+    onChange?: (value: string | null, actionMeta: ActionMeta<SelectOption>) => void;
+};
+
+type MultiSelectProps = BaseSelectProps & {
+    isMulti: true;
+    value?: string[];
+    onChange?: (value: string[], actionMeta: ActionMeta<SelectOption>) => void;
+};
+
+type CustomSelectProps = SingleSelectProps | MultiSelectProps;
+
+// Size configuration type
+type SizeConfig = {
+    minHeight: string;
+    fontSize: string;
+    padding: string;
+};
+
+// Variant configuration type
+type VariantConfig = {
+    backgroundColor: string;
+    border: string;
+    focusBorderColor: string;
+    focusBoxShadow: string;
 };
 
 export const CustomSelect = ({
@@ -35,13 +74,15 @@ export const CustomSelect = ({
     isMulti = false,
     className = "",
     width = "320px",
-    size = "medium", // small, medium, large
-    variant = "default", // default, outline, filled
+    size = "medium",
+    variant = "default",
     error = false,
+    menuPlacement = "auto",
+    menuPosition = "fixed",
     ...props
 }: CustomSelectProps) => {
-    // Size configurations
-    const sizeConfig = {
+    // Size configurations with proper typing
+    const sizeConfig: Record<SelectSize, SizeConfig> = {
         small: {
             minHeight: '32px',
             fontSize: '12px',
@@ -59,8 +100,8 @@ export const CustomSelect = ({
         }
     };
 
-    // Variant configurations
-    const variantConfig = {
+    // Variant configurations with proper typing
+    const variantConfig: Record<SelectVariant, VariantConfig> = {
         default: {
             backgroundColor: 'white',
             border: error ? '1px solid #ef4444' : '1px solid #e5e7eb',
@@ -84,7 +125,8 @@ export const CustomSelect = ({
     const currentSize = sizeConfig[size];
     const currentVariant = variantConfig[variant];
 
-    const customStyles = {
+    // Properly typed custom styles
+    const customStyles: StylesConfig<SelectOption, boolean, GroupBase<SelectOption>> = {
         control: (provided, state) => ({
             ...provided,
             width: width,
@@ -222,8 +264,8 @@ export const CustomSelect = ({
         })
     };
 
-    // Handle value conversion
-    const getSelectValue = () => {
+    // Handle value conversion with proper typing
+    const getSelectValue = (): SelectOption | SelectOption[] | null => {
         if (!value) return null;
 
         if (isMulti) {
@@ -235,19 +277,28 @@ export const CustomSelect = ({
         return options.find(option => option.value === value) || null;
     };
 
-    // Handle change conversion
-    const handleChange = (selectedOption) => {
+    // Handle change conversion with proper typing
+    const handleChange = (
+        selectedOption: SingleValue<SelectOption> | MultiValue<SelectOption>,
+        actionMeta: ActionMeta<SelectOption>
+    ): void => {
         if (isMulti) {
-            const values = selectedOption ? selectedOption.map(option => option.value) : [];
-            onChange?.(values);
+            const values = selectedOption && Array.isArray(selectedOption)
+                ? selectedOption.map(option => option.value)
+                : [];
+            (onChange as MultiSelectProps['onChange'])?.(values, actionMeta);
         } else {
-            onChange?.(selectedOption ? selectedOption.value : null);
+            const singleOption = selectedOption as SingleValue<SelectOption>;
+            (onChange as SingleSelectProps['onChange'])?.(
+                singleOption ? singleOption.value : null,
+                actionMeta
+            );
         }
     };
 
     return (
         <div className={className}>
-            <Select
+            <Select<SelectOption, boolean, GroupBase<SelectOption>>
                 options={options}
                 value={getSelectValue()}
                 onChange={handleChange}
@@ -258,8 +309,8 @@ export const CustomSelect = ({
                 isClearable={isClearable}
                 isMulti={isMulti}
                 styles={customStyles}
-                menuPosition="fixed"
-                menuPlacement="auto"
+                menuPosition={menuPosition}
+                menuPlacement={menuPlacement}
                 noOptionsMessage={() => "No options found"}
                 loadingMessage={() => "Loading..."}
                 {...props}
@@ -267,110 +318,3 @@ export const CustomSelect = ({
         </div>
     );
 };
-
-// // Usage Examples:
-// const ExampleUsage = () => {
-//     const [selectedCourse, setSelectedCourse] = React.useState('foundation-ui-ux');
-//     const [multiSelected, setMultiSelected] = React.useState([]);
-
-//     const courseOptions = [
-//         { value: 'foundation-ui-ux', label: 'Foundation of UI/UX' },
-//         { value: 'advanced-react', label: 'Advanced React' },
-//         { value: 'javascript-fundamentals', label: 'JavaScript Fundamentals' },
-//         { value: 'web-design-principles', label: 'Web Design Principles' },
-//         { value: 'nodejs-backend', label: 'Node.js Backend Development' }
-//     ];
-
-//     return (
-//         <div className="p-8 space-y-6">
-//             <div>
-//                 <h3 className="text-lg font-semibold mb-2">Default Select</h3>
-//                 <CustomSelect
-//                     options={courseOptions}
-//                     value={selectedCourse}
-//                     onChange={setSelectedCourse}
-//                     placeholder="Select a course"
-//                 />
-//             </div>
-
-//             <div>
-//                 <h3 className="text-lg font-semibold mb-2">Searchable Select</h3>
-//                 <CustomSelect
-//                     options={courseOptions}
-//                     value={selectedCourse}
-//                     onChange={setSelectedCourse}
-//                     placeholder="Search courses..."
-//                     isSearchable={true}
-//                     isClearable={true}
-//                 />
-//             </div>
-
-//             <div>
-//                 <h3 className="text-lg font-semibold mb-2">Multi Select</h3>
-//                 <CustomSelect
-//                     options={courseOptions}
-//                     value={multiSelected}
-//                     onChange={setMultiSelected}
-//                     placeholder="Select multiple courses"
-//                     isMulti={true}
-//                     isSearchable={true}
-//                 />
-//             </div>
-
-//             <div>
-//                 <h3 className="text-lg font-semibold mb-2">Different Sizes</h3>
-//                 <div className="space-y-3">
-//                     <CustomSelect
-//                         options={courseOptions}
-//                         placeholder="Small size"
-//                         size="small"
-//                         width="250px"
-//                     />
-//                     <CustomSelect
-//                         options={courseOptions}
-//                         placeholder="Medium size (default)"
-//                         size="medium"
-//                     />
-//                     <CustomSelect
-//                         options={courseOptions}
-//                         placeholder="Large size"
-//                         size="large"
-//                         width="400px"
-//                     />
-//                 </div>
-//             </div>
-
-//             <div>
-//                 <h3 className="text-lg font-semibold mb-2">Different Variants</h3>
-//                 <div className="space-y-3">
-//                     <CustomSelect
-//                         options={courseOptions}
-//                         placeholder="Default variant"
-//                         variant="default"
-//                     />
-//                     <CustomSelect
-//                         options={courseOptions}
-//                         placeholder="Outline variant"
-//                         variant="outline"
-//                     />
-//                     <CustomSelect
-//                         options={courseOptions}
-//                         placeholder="Filled variant"
-//                         variant="filled"
-//                     />
-//                 </div>
-//             </div>
-
-//             <div>
-//                 <h3 className="text-lg font-semibold mb-2">Error State</h3>
-//                 <CustomSelect
-//                     options={courseOptions}
-//                     placeholder="Select with error"
-//                     error={true}
-//                 />
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default CustomSelect;

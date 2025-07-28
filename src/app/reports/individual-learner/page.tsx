@@ -1,6 +1,5 @@
 // app/reports/individual-learner/page.tsx
-'use client';
-
+"use client";
 import { GoBackRoute } from '@/components/reports/GoBackRoute';
 import { Button } from '@/components/ui/button';
 import { CustomSelect } from '@/components/ui/CustomSelect';
@@ -20,7 +19,7 @@ export default function IndividualLearnerReport() {
     const router = useRouter();
     const params = useParams();
     const learnerId = params.id as string;
-    const [selectedLearner, setSelectedLearner] = useState(learnerId);
+    const [selectedLearner, setSelectedLearner] = useState<string | null>(learnerId);
 
     useEffect(() => {
         if (selectedLearner) {

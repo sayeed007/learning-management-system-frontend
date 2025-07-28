@@ -1,17 +1,6 @@
 import { useState } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-
-type Course = {
-    id: string;
-    name: string;
-    category: string;
-    description: string;
-    difficulty: string;
-    chapters: number;
-    lessons: number;
-    quizzes: number;
-    image: string;
-};
+import { CourseDetails } from "@/types";
 
 const categories = [
     "Design & Development",
@@ -23,7 +12,7 @@ const categories = [
     "Design & Creative Arts",
 ];
 
-export function CreateCourseModal({ open, onOpenChange, onCreate }: { open: boolean; onOpenChange: (v: boolean) => void; onCreate: (course: Omit<Course, 'id'>) => void }) {
+export function CreateCourseModal({ open, onOpenChange, onCreate }: { open: boolean; onOpenChange: (v: boolean) => void; onCreate: (course: Omit<CourseDetails, 'id'>) => void }) {
     const [name, setName] = useState("");
     const [category, setCategory] = useState(categories[0]);
     const [description, setDescription] = useState("");

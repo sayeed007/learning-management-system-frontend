@@ -1,21 +1,21 @@
-'use client'
+"use client"
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
+const navItems = [
+    { name: 'Dashboard', href: '/dashboard' },
+    { name: 'Courses', href: '/courses' },
+    { name: 'Question Bank', href: '/question-bank' },
+    { name: 'Article', href: '/article' },
+    { name: 'Reports', href: '/reports' },
+];
+
 const Header = () => {
     const [activeLink, setActiveLink] = useState('dashboard');
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const pathname = usePathname();
-
-    const navItems = [
-        { name: 'Dashboard', href: '/dashboard' },
-        { name: 'Courses', href: '/courses' },
-        { name: 'Question Bank', href: '/question-bank' },
-        { name: 'Article', href: '/article' },
-        { name: 'Reports', href: '/reports' },
-    ];
 
     useEffect(() => {
         const currentPath = pathname.split('/')[1] || 'dashboard';
@@ -23,6 +23,7 @@ const Header = () => {
         if (matchingNavItem) {
             setActiveLink(matchingNavItem.name.toLowerCase());
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pathname, navItems]);
 
     const toggleMobileMenu = () => {

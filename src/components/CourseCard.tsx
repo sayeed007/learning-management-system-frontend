@@ -1,23 +1,18 @@
+import { CourseDetails } from "@/types";
+import Image from "next/image";
 import React from "react";
 
-type Course = {
-    id: string;
-    name: string;
-    category: string;
-    description: string;
-    difficulty: string;
-    chapters: number;
-    lessons: number;
-    quizzes: number;
-    image: string;
-};
 
-export function CourseCard({ course }: { course: Course }) {
+export function CourseCard({ course }: { course: CourseDetails }) {
     return (
         <div className="bg-white rounded-2xl shadow p-6 flex flex-col gap-4 hover:shadow-lg transition cursor-pointer">
             <div className="h-32 w-full flex items-center justify-center mb-2">
                 {/* Replace with real image if available */}
-                <img src={course.image} alt={course.name} className="h-24 w-24 object-contain" />
+                <Image
+                    src={course.image}
+                    alt={course.name}
+                    className="h-24 w-24 object-contain"
+                />
             </div>
             <div className="flex-1">
                 <div className="text-lg font-bold text-dark mb-1 flex items-center gap-2">

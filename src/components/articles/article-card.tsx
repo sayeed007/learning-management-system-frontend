@@ -5,7 +5,7 @@ import Image from "next/image"
 interface ArticleCardProps {
     id: string
     title: string
-    author: string
+    author?: string
     date: string
     views: number
     thumbnail: string
@@ -22,27 +22,29 @@ export function ArticleCard({
 }: ArticleCardProps) {
     return (
         <div
-            className="bg-white rounded-lg shadow-sm border hover:shadow-md transition-shadow cursor-pointer"
+            className="bg-white rounded-2xl border-off-white-2 shadow-1 border p-2 hover:shadow-md transition-shadow cursor-pointer"
             onClick={onClick}
         >
             <div className="relative aspect-video overflow-hidden rounded-t-lg">
                 <Image
                     src={thumbnail}
                     alt={title}
-                    fill
                     className="object-cover"
+                    fill
                 />
             </div>
 
-            <div className="p-4">
-                <h3 className="font-semibold text-gray-900 mb-3 line-clamp-2">
-                    {title}
-                </h3>
+            <h3 className="font-semibold text-gray-900 mb-3 line-clamp-2 py-4">
+                {title}
+            </h3>
 
-                <div className="flex items-center gap-2 text-sm text-gray-600 mb-2">
-                    <User className="w-4 h-4" />
-                    <span>{author}</span>
-                </div>
+            <div className="py-4 border-t-1 border-off-white-5">
+                {author &&
+                    <div className="flex items-center gap-2 text-sm text-gray-600 mb-2">
+                        <User className="w-4 h-4" />
+                        <span>{author}</span>
+                    </div>
+                }
 
                 <div className="flex items-center justify-between text-sm text-gray-500">
                     <div className="flex items-center gap-1">

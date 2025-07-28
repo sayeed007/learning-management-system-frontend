@@ -47,8 +47,8 @@
     --shadow-4: 0px 12px 36px 0px rgba(44, 48, 64, 0.12);
     --shadow-5: 0px 16px 40px 0px rgba(44, 48, 64, 0.25);
     --shadow-popup: 0px -6px 30px 0px rgba(0, 0, 0, 0.25);
-
     --shadow-ui: 0px 1px 6px 0px rgba(51, 56, 68, 0.08);
+    --shadow-drop: 0px 4px 10px 0px rgba(9, 67, 182, 0.8);
 }
 
 :root {
@@ -95,5 +95,13 @@
 
   .shadow-popup {
     box-shadow: var(--shadow-popup);
+  }
+
+  .shadow-ui {
+    box-shadow: var(--shadow-ui);
+  }
+
+  .shadow-drop {
+    box-shadow: var(--shadow-drop);
   }
 }

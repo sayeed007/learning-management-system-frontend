@@ -2,8 +2,6 @@
 "use client"
 
 import { useState } from "react"
-import { Search } from "lucide-react"
-import { Input } from "@/components/ui/input"
 import { ArticleCard } from "./article-card"
 import { CreateArticleModal } from "./create-article-modal"
 
@@ -15,66 +13,68 @@ const sampleArticles = [
         author: "Sufain Huzail",
         date: "Apr 24, 2024",
         views: 125,
-        thumbnail: "/api/placeholder/300/200"
+        // thumbnail: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=300&h=200&q=80",
+        thumbnail: `https://picsum.photos/300/200?random=${1}`,
+        myArticle: true,
+        isPublished: true,
     },
-    // Add more sample articles as needed
-    ...Array.from({ length: 9 }, (_, i) => ({
-        id: (i + 2).toString(),
+    {
+        id: "2",
         title: "Article on basic guideline of Human Centered Design",
         author: "Sufain Huzail",
         date: "Apr 24, 2024",
         views: 125,
-        thumbnail: "/api/placeholder/300/200"
-    }))
-]
+        thumbnail: `https://picsum.photos/300/200?random=${2}`,
+        myArticle: true,
+        isPublished: false,
+    },
+    // Add more sample articles with different valid Unsplash images
+    ...Array.from({ length: 8 }, (_, i) => ({
+        id: (i + 3).toString(),
+        title: "Article on basic guideline of Human Centered Design",
+        author: "Sufain Huzail",
+        date: "Apr 24, 2024",
+        views: 125,
+        thumbnail: `https://picsum.photos/300/200?random=${(i + 3)}`,
+        myArticle: false,
+        isPublished: true,
+    })),
+];
 
-export function ArticlesGrid() {
-    const [searchQuery, setSearchQuery] = useState("")
+// Define the props interface
+interface ArticlesGridProps {
+    activeTab: "my" | "all";
+    searchQuery: string;
+}
+
+// Define the component with typed props
+const ArticlesGrid: React.FC<ArticlesGridProps> = ({
+    activeTab,
+    searchQuery,
+}) => {
+
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)
-    const [activeTab, setActiveTab] = useState<"my" | "all">("all")
 
-    const filteredArticles = sampleArticles.filter(article =>
-        article.title.toLowerCase().includes(searchQuery.toLowerCase())
-    )
+    const filteredArticles = sampleArticles.filter((article) => {
+        // Check if article matches the activeTab condition
+        const matchesTab = activeTab === "my" ? article.myArticle : true;
+
+        // Check if article matches the searchQuery (case-insensitive)
+        const matchesSearch = searchQuery
+            ? article.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            article.title.toLowerCase().includes(searchQuery.toLowerCase())
+            : true;
+
+        // Return true only if both conditions are met
+        return matchesTab && matchesSearch;
+    });
+
+
 
     return (
-        <div className="p-6">
+        <div className="py-6">
             {/* Header */}
-            <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center gap-8">
-                    <h1 className="text-2xl font-semibold">Article</h1>
-                    <div className="flex gap-1 border-b">
-                        <button
-                            className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${activeTab === "my"
-                                ? "border-blue-600 text-blue-600"
-                                : "border-transparent text-gray-500 hover:text-gray-700"
-                                }`}
-                            onClick={() => setActiveTab("my")}
-                        >
-                            My Article
-                        </button>
-                        <button
-                            className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${activeTab === "all"
-                                ? "border-blue-600 text-blue-600"
-                                : "border-transparent text-gray-500 hover:text-gray-700"
-                                }`}
-                            onClick={() => setActiveTab("all")}
-                        >
-                            All Article
-                        </button>
-                    </div>
-                </div>
 
-                <div className="relative w-80">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                    <Input
-                        placeholder="Search here"
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        className="pl-10"
-                    />
-                </div>
-            </div>
 
             {/* Articles Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
@@ -82,6 +82,7 @@ export function ArticlesGrid() {
                     <ArticleCard
                         key={article.id}
                         {...article}
+                        author={activeTab === "my" ? "" : article?.author}
                         onClick={() => {
                             // Handle article click - navigate to edit or view
                             console.log("Article clicked:", article.id)
@@ -97,3 +98,5 @@ export function ArticlesGrid() {
         </div>
     )
 }
+
+export default ArticlesGrid;

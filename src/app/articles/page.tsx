@@ -1,23 +1,52 @@
 // app/articles/page.tsx
 "use client"
 
-import { useState, useEffect } from "react"
-import { ArticleEmptyState } from "@/components/articles/empty-state"
-import { ArticlesGrid } from "@/components/articles/articles-grid"
+import ArticleHeader from "@/components/articles/article-header";
+import ArticlesGrid from "@/components/articles/articles-grid"
+import { EmptyStateWithCreate } from "@/components/EmptyStateWithCreate"
+import { useEffect, useState } from "react"
 
 export default function ArticlesPage() {
-    const [hasArticles, setHasArticles] = useState(false)
+    const [hasArticles, setHasArticles] = useState(false);
+    const [activeTab, setActiveTab] = useState<"my" | "all">("my");
+    const [searchQuery, setSearchQuery] = useState("");
+
 
     // Check if user has articles - replace with your actual logic
     useEffect(() => {
         // For demo purposes, set to true to show the grid
         // Set to false to show empty state
-        setHasArticles(false)
-    }, [])
+        setHasArticles(false);
+    }, []);
+
+
+    const handleCreateNewArticle = () => {
+
+    };
 
     return (
-        <div className="min-h-screen bg-gray-50">
-            {hasArticles ? <ArticlesGrid /> : <ArticleEmptyState />}
-        </div>
+        <>
+            <ArticleHeader
+                activeTab={activeTab}
+                setActiveTab={setActiveTab}
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+            />
+
+            {hasArticles ?
+                <ArticlesGrid
+                    activeTab={activeTab}
+                    searchQuery={searchQuery}
+                />
+                :
+                // <ArticleEmptyState />
+                <EmptyStateWithCreate
+                    message="No article to show"
+                    description="Article you’ve created will show up here."
+                    buttonText="Create Now"
+                    onClick={handleCreateNewArticle}
+                />
+            }
+        </>
     )
 }

@@ -117,60 +117,11 @@ export default function DashboardPage() {
                   <Image
                     src={course.image}
                     alt={course.title}
+                    width={100}
+                    height={128}
                     className="rounded-t-xl h-32 w-full object-cover"
                   />
                   <div className="p-4">
-                    <div className="flex items-center gap-2 mb-2">
-                      <button
-                        className="p-2 rounded-full bg-grey-1 text-white disabled:opacity-50"
-                        onClick={() => setCarouselIndex(Math.max(carouselIndex - 1, 0))}
-                        disabled={carouselIndex === 0}
-                      >
-                        ◀
-                      </button>
-                      <div className="flex gap-4 overflow-x-auto">
-                        {visibleCourses.map((course, idx) => (
-                          <div key={`${course.title}-${idx}`} className="bg-white rounded-xl shadow w-80 min-w-[320px] flex-shrink-0">
-                            <Image
-                              src={course.image}
-                              alt={course.title}
-                              className="rounded-t-xl h-32 w-full object-cover"
-                            />
-                            <div className="p-4">
-                              <div className="flex items-center gap-2 mb-2">
-                                {course.completed && (
-                                  <span className="bg-earth-green text-white text-10 px-2 py-1 rounded-full">Completed</span>
-                                )}
-                                <span className="ml-auto text-warning font-bold text-14">★ {course.rating}</span>
-                              </div>
-                              <div className="font-bold text-16 mb-1 text-dark">{course.title}</div>
-                              <div className="text-14 text-grey-2 mb-2">{course.author}</div>
-                              <div className="text-14 text-grey-2 mb-2">{course.desc}</div>
-                              <div className="flex gap-2 text-13 text-grey-1">
-                                {course.meta.split("|").map((m) => (
-                                  <span key={m.trim()}>{m.trim()}</span>
-                                ))}
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                      <button
-                        className="p-2 rounded-full bg-grey-1 text-white disabled:opacity-50"
-                        onClick={() => setCarouselIndex(Math.min(carouselIndex + 1, courses.length - 3))}
-                        disabled={carouselIndex >= courses.length - 3}
-                      >
-                        ▶
-                      </button>
-                      {course.completed && (
-                        <span className="bg-earth-green text-white text-10 px-2 py-1 rounded-full">
-                          Completed
-                        </span>
-                      )}
-                      <span className="ml-auto text-warning font-bold text-14">
-                        ★ {course.rating}
-                      </span>
-                    </div >
                     <div className="font-bold text-16 mb-1 text-dark">
                       {course.title}
                     </div>

@@ -2,9 +2,9 @@
 
 import { CourseCard } from "@/components/CourseCard";
 import { CreateCourseModal } from "@/components/CreateCourseModal";
+import { EmptyStateWithCreate } from "@/components/EmptyStateWithCreate";
 import { CourseDetails } from "@/types";
 import { useState } from "react";
-import { EmptyState } from "@/components/NoContent";
 
 // Example course type
 const initialCourses: CourseDetails[] = [
@@ -110,7 +110,7 @@ export default function CoursesPage() {
   // Filter courses based on tab
 
   return (
-    <div className="px-[20px] px-4 min-h-screen pt-[10px] bg-[#F5F5FA]">
+    <div className="px-4 min-h-screen pt-3">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-3xl font-bold">Courses</h1>
@@ -140,7 +140,7 @@ export default function CoursesPage() {
           ))}
         </div>
       ) : (
-        <EmptyState
+        <EmptyStateWithCreate
           message="No course to show"
           description="Courses you’ve created will show up here."
           buttonText="Create Now"

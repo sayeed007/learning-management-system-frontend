@@ -58,7 +58,13 @@ function NotificationItem({ avatar, icon, message, time }: Notification) {
     return (
         <div className="flex items-start gap-4 py-4 border-b last:border-b-0 border-off-white-4">
             {avatar ? (
-                <Image src={avatar} alt="avatar" width={40} height={40} className="rounded-full object-cover" />
+                <Image
+                    src={avatar}
+                    alt="avatar"
+                    width={40}
+                    height={40}
+                    className="rounded-full object-cover"
+                />
             ) : (
                 <span className="w-10 h-10 flex items-center justify-center rounded-full bg-off-white-4 text-info text-xl">
                     📅

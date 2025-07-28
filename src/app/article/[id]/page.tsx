@@ -22,6 +22,7 @@ export default function ArticleDetailPage() {
                 <Image
                     src={article.thumbnail}
                     alt={article.title}
+                    height={192}
                     className="h-48 w-full object-cover rounded-xl mb-6"
                 />
                 <div className="text-2xl font-bold text-dark mb-2">{article.title}</div>

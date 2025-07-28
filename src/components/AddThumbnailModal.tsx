@@ -34,6 +34,8 @@ export function AddThumbnailModal({ open, onOpenChange, onSave }: { open: boolea
                         <Image
                             src={preview}
                             alt="Thumbnail preview"
+                            width={224}
+                            height={160}
                             className="w-56 h-40 object-cover rounded-xl mb-2"
                         />
                     ) : (

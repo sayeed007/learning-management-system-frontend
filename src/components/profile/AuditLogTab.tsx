@@ -28,7 +28,13 @@ export function AuditLogTab() {
                         {logs.map((log, i) => (
                             <tr key={i} className="border-b border-off-white-4">
                                 <td className="py-2 px-2 flex items-center gap-2">
-                                    <Image src={log.user.avatar} alt={log.user.name} width={32} height={32} className="rounded-full" />
+                                    <Image
+                                        src={log.user.avatar}
+                                        alt={log.user.name}
+                                        width={32}
+                                        height={32}
+                                        className="rounded-full"
+                                    />
                                     <span className="text-info font-semibold hover:underline cursor-pointer">{log.user.name} | {log.user.id}</span>
                                 </td>
                                 <td className="py-2 px-2">{log.activity}</td>

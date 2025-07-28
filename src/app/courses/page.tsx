@@ -16,7 +16,7 @@ const initialCourses: CourseDetails[] = [
         chapters: 4,
         lessons: 15,
         quizzes: 2,
-        image: "/public/globe.svg",
+        image: "/Thumbnail.png",
     },
 ];
 

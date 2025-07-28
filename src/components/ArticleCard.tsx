@@ -20,7 +20,9 @@ export function ArticleCard({ article }: { article: Article }) {
             <Image
                 src={article.thumbnail}
                 alt={article.title}
-                className="h-36 w-full object-cover rounded-xl mb-3"
+                width={250}
+                height={140}
+                className="h-[140px] w-full object-cover rounded-xl mb-3"
             />
             <div className="flex-1">
                 <div className="text-base font-bold text-dark mb-1 line-clamp-2">{article.title}</div>

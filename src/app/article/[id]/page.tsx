@@ -9,7 +9,7 @@ const article = {
     author: "Sufian Huzaif",
     date: "Apr 24, 2024",
     views: 125,
-    thumbnail: "/public/globe.svg",
+    thumbnail: "/Thumbnail.png",
     content: `<p>In today's technology-driven world, understanding databases is no longer optional for software developers...</p>`
 };
 

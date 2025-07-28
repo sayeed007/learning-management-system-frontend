@@ -20,7 +20,7 @@ export function CreateCourseModal({ open, onOpenChange, onCreate }: { open: bool
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        onCreate({ name, category, description, difficulty, chapters: 0, lessons: 0, quizzes: 0, image: "/public/globe.svg" });
+        onCreate({ name, category, description, difficulty, chapters: 0, lessons: 0, quizzes: 0, image: "/Thumbnail.png" });
         setName("");
         setCategory(categories[0]);
         setDescription("");

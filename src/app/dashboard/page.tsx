@@ -1,5 +1,4 @@
 "use client"
-import { Header } from "@/components/Header";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -76,7 +75,6 @@ export default function DashboardPage() {
 
     return (
         <div className="min-h-screen bg-off-white-1 p-6">
-            <Header />
 
             {/* Stats Cards */}
             <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">

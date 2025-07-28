@@ -8,7 +8,7 @@ const navItems = [
     { name: 'Dashboard', href: '/dashboard' },
     { name: 'Courses', href: '/courses' },
     { name: 'Question Bank', href: '/question-bank' },
-    { name: 'Article', href: '/article' },
+    { name: 'Articles', href: '/articles' },
     { name: 'Reports', href: '/reports' },
 ];
 

@@ -1,9 +1,6 @@
 "use client"
-import React, { useState } from "react";
-import { NotificationPopover } from "@/components/NotificationPopover";
-import Link from "next/link";
-import { Header } from "@/components/Header";
 import Image from "next/image";
+import { useState } from "react";
 
 const stats = [
   { label: "Total Learner", value: 120, icon: "👤" },

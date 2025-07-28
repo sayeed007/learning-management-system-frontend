@@ -7,7 +7,7 @@ export function CreateArticleModal({ open, onOpenChange, onCreate }: { open: boo
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        onCreate({ title, author: "Sufian Huzaif", date: new Date().toLocaleDateString(), views: 0, thumbnail: "/public/globe.svg" });
+        onCreate({ title, author: "Sufian Huzaif", date: new Date().toLocaleDateString(), views: 0, thumbnail: "/Thumbnail.png" });
         setTitle("");
     };
 

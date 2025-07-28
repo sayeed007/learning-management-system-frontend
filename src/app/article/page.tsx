@@ -10,7 +10,7 @@ const initialArticles: Article[] = [
         author: "Sufian Huzaif",
         date: "Apr 24, 2024",
         views: 125,
-        thumbnail: "/public/globe.svg",
+        thumbnail: "/Thumbnail.png",
     },
 ];
 

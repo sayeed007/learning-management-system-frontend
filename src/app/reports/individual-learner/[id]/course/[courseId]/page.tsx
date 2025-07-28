@@ -126,97 +126,95 @@ export default function IndividualCourseReport() {
     };
 
     return (
-        <Layout title="">
-            <div className="min-h-screen bg-gray-50/50">
-                {/* Header */}
-                <div className="bg-white border-b border-gray-200">
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="flex items-center justify-between h-16">
-                            <div className="flex items-center space-x-4">
-                                <Button
-                                    variant="ghost"
-                                    size="sm"
-                                    onClick={() => router.back()}
-                                    className="p-2"
-                                >
-                                    <ArrowLeft className="h-5 w-5" />
-                                </Button>
-                                <div>
-                                    <h1 className="text-xl font-semibold text-gray-900">{courseData.title}</h1>
-                                </div>
+        <div className="min-h-screen bg-gray-50/50">
+            {/* Header */}
+            <div className="bg-white border-b border-gray-200">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="flex items-center justify-between h-16">
+                        <div className="flex items-center space-x-4">
+                            <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => router.back()}
+                                className="p-2"
+                            >
+                                <ArrowLeft className="h-5 w-5" />
+                            </Button>
+                            <div>
+                                <h1 className="text-xl font-semibold text-gray-900">{courseData.title}</h1>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                    {/* Course Progress Summary */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                        <Card className="p-6">
-                            <div className="flex items-center space-x-4">
-                                <div className="p-3 bg-green-100 rounded-lg">
-                                    <CheckCircle className="h-8 w-8 text-green-600" />
-                                </div>
-                                <div>
-                                    <p className="text-sm text-gray-600">Completed</p>
-                                    <p className="text-3xl font-bold text-gray-900">{courseData.completed}%</p>
-                                </div>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                {/* Course Progress Summary */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <Card className="p-6">
+                        <div className="flex items-center space-x-4">
+                            <div className="p-3 bg-green-100 rounded-lg">
+                                <CheckCircle className="h-8 w-8 text-green-600" />
                             </div>
-                        </Card>
-
-                        <Card className="p-6">
-                            <div className="flex items-center space-x-4">
-                                <div className="p-3 bg-orange-100 rounded-lg">
-                                    <Clock className="h-8 w-8 text-orange-600" />
-                                </div>
-                                <div>
-                                    <p className="text-sm text-gray-600">Time Spent</p>
-                                    <p className="text-3xl font-bold text-gray-900">{courseData.timeSpent} hours</p>
-                                </div>
+                            <div>
+                                <p className="text-sm text-gray-600">Completed</p>
+                                <p className="text-3xl font-bold text-gray-900">{courseData.completed}%</p>
                             </div>
-                        </Card>
-                    </div>
+                        </div>
+                    </Card>
 
-                    {/* Lessons Table */}
-                    <Card className="overflow-hidden">
-                        <div className="overflow-x-auto">
-                            <table className="w-full">
-                                <thead className="bg-gray-50 border-b border-gray-200">
-                                    <tr>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">SL</th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Lesson</th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Start Date</th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Time Spent</th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Completion Percentage</th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="bg-white divide-y divide-gray-200">
-                                    {mockLessons.map((lesson, index) => (
-                                        <tr key={lesson.id} className="hover:bg-gray-50 transition-colors">
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{index + 1}</td>
-                                            <td className="px-6 py-4 text-sm text-gray-900 max-w-md">
-                                                <div className="flex items-center space-x-2">
-                                                    {getStatusIcon(lesson.status)}
-                                                    <span className="truncate">{lesson.lesson}</span>
-                                                </div>
-                                            </td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{lesson.startDate}</td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{lesson.timeSpent}</td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                {lesson.completionPercentage > 0 ? `${lesson.completionPercentage}%` : '--'}
-                                            </td>
-                                            <td className="px-6 py-4 whitespace-nowrap">
-                                                {getStatusBadge(lesson.status)}
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                    <Card className="p-6">
+                        <div className="flex items-center space-x-4">
+                            <div className="p-3 bg-orange-100 rounded-lg">
+                                <Clock className="h-8 w-8 text-orange-600" />
+                            </div>
+                            <div>
+                                <p className="text-sm text-gray-600">Time Spent</p>
+                                <p className="text-3xl font-bold text-gray-900">{courseData.timeSpent} hours</p>
+                            </div>
                         </div>
                     </Card>
                 </div>
+
+                {/* Lessons Table */}
+                <Card className="overflow-hidden">
+                    <div className="overflow-x-auto">
+                        <table className="w-full">
+                            <thead className="bg-gray-50 border-b border-gray-200">
+                                <tr>
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">SL</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Lesson</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Start Date</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Time Spent</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Completion Percentage</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody className="bg-white divide-y divide-gray-200">
+                                {mockLessons.map((lesson, index) => (
+                                    <tr key={lesson.id} className="hover:bg-gray-50 transition-colors">
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{index + 1}</td>
+                                        <td className="px-6 py-4 text-sm text-gray-900 max-w-md">
+                                            <div className="flex items-center space-x-2">
+                                                {getStatusIcon(lesson.status)}
+                                                <span className="truncate">{lesson.lesson}</span>
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{lesson.startDate}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{lesson.timeSpent}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                            {lesson.completionPercentage > 0 ? `${lesson.completionPercentage}%` : '--'}
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap">
+                                            {getStatusBadge(lesson.status)}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </Card>
             </div>
-        </Layout>
+        </div>
     );
 }

@@ -10,6 +10,8 @@
   --color-earth-green: #40A578;
   --color-dark: #1D1E25;
   --color-white: #FFFFFF;
+  --color-gradient-start: rgba(211, 227, 255, 1);
+  --color-gradient-end: rgba(243, 255, 237, 1);
 
   /* Greyscale */
   --color-off-white-1: #F6F6F9;
@@ -37,10 +39,20 @@
   --text-14: 14px;
   --text-13: 13px;
   --text-10: 10px;
+
+  /* Custom Shadows */
+    --shadow-1: 0px 1px 3px 0px rgba(44, 48, 64, 0.08);
+    --shadow-2: 0px 4px 12px 0px rgba(44, 48, 64, 0.08);
+    --shadow-3: 0px 8px 24px 6px rgba(44, 48, 64, 0.12);
+    --shadow-4: 0px 12px 36px 0px rgba(44, 48, 64, 0.12);
+    --shadow-5: 0px 16px 40px 0px rgba(44, 48, 64, 0.25);
+    --shadow-popup: 0px -6px 30px 0px rgba(0, 0, 0, 0.25);
+
+    --shadow-ui: 0px 1px 6px 0px rgba(51, 56, 68, 0.08);
 }
 
 :root {
-  --background: #ffffff;
+  --background: #F5F5FA;
   --foreground: #171717;
 }
 
@@ -56,5 +68,32 @@
     background: var(--background);
     color: var(--foreground);
     font-family: var(--font-poppins);
+  }
+}
+
+/* Custom shadow utilities */
+@layer utilities {
+  .shadow-1 {
+    box-shadow: var(--shadow-1);
+  }
+
+  .shadow-2 {
+    box-shadow: var(--shadow-2);
+  }
+
+  .shadow-3 {
+    box-shadow: var(--shadow-3);
+  }
+
+  .shadow-4 {
+    box-shadow: var(--shadow-4);
+  }
+
+  .shadow-5 {
+    box-shadow: var(--shadow-5);
+  }
+
+  .shadow-popup {
+    box-shadow: var(--shadow-popup);
   }
 }

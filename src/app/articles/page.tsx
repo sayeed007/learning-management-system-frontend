@@ -48,7 +48,6 @@ export default function ArticlesPage() {
                     searchQuery={searchQuery}
                 />
                 :
-                // <ArticleEmptyState />
                 <EmptyStateWithCreate
                     message="No article to show"
                     description="Article you’ve created will show up here."

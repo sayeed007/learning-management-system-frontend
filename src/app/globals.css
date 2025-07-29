@@ -16,7 +16,7 @@
   /* Greyscale */
   --color-off-white-1: #F6F6F9;
   --color-off-white-2: #F4F6F8;
-  --color-off-white-3: #F7F2F4;
+  --color-off-white-3: #EFF2F4;
   --color-off-white-4: #DFE3E8;
   --color-off-white-5: #C4CDD5;
   --color-grey-1: #919EAB;
@@ -107,4 +107,13 @@
   .shadow-drop {
     box-shadow: var(--shadow-drop);
   }
+}
+
+
+.ql-container.ql-snow {
+  min-height: 70vh;
+}
+
+.ql-toolbar.ql-snow {
+  background-color: var(--color-off-white-3);
 }

@@ -9,15 +9,22 @@ import { useState } from "react"
 import { GoBackRoute } from "../reports/GoBackRoute"
 import { Input } from "../ui/input"
 import { MoreOptionsPopup } from "./article-more-option-popup"
+import RichTextEditor from "../RichTextEditor"
+import PrimaryOutlineButton from "../ui/PrimaryOutlineButton"
 
 export function ArticleCreationOptions() {
     const router = useRouter()
     const searchParams = useSearchParams()
     const [articleName, setArticleName] = useState<string>(searchParams.get('name') || 'Untitled Article');
     const [showMorePopup, setShowMorePopup] = useState<boolean>(false);
+    const [articleContent, setArticleContent] = useState('');
+
+    const [currentArticleWrittingMethod, setCurrentArticleWrittingMethod] = useState<'root' | 'scratch'>('root')
+
 
     const handleStartFromScratch = () => {
-        router.push(`/articles/edit?name=${encodeURIComponent(articleName)}&mode=scratch`)
+        // router.push(`/articles/edit?name=${encodeURIComponent(articleName)}&mode=scratch`);
+        setCurrentArticleWrittingMethod('scratch');
     }
 
     const handleReadyTemplate = () => {
@@ -28,9 +35,7 @@ export function ArticleCreationOptions() {
         router.push(`/articles/edit?name=${encodeURIComponent(articleName)}&mode=import`)
     }
 
-    const handlePreview = () => {
-        router.push(`/articles/preview?name=${encodeURIComponent(articleName)}`)
-    }
+
 
     const handlePublish = () => {
         router.push(`/articles/publish?name=${encodeURIComponent(articleName)}`)
@@ -59,6 +64,23 @@ export function ArticleCreationOptions() {
         // Navigate to advanced settings
         router.push(`/articles/settings?name=${encodeURIComponent(articleName)}`)
     }
+
+    const handlePreview = () => {
+        if (!articleName.trim() || !articleContent.trim()) {
+            alert('Please fill in both title and content');
+            return;
+        }
+
+        const params = new URLSearchParams();
+        params.set('content', encodeURIComponent(''));
+        params.set('title', encodeURIComponent(''));
+        params.set('author', encodeURIComponent(''));
+        params.set('category', encodeURIComponent(''));
+
+        const url = `/articles/preview/${encodeURIComponent(articleName)}?${params.toString()}`;
+
+        router.push(url);
+    };
 
 
     console.log(showMorePopup);
@@ -104,14 +126,19 @@ export function ArticleCreationOptions() {
                             Publish
                         </Button>
 
-                        <Button
+                        {/* <Button
                             variant="ghost"
                             size="sm"
                             onClick={() => { handlePreview() }}
                             className="cursor-pointer bg-background text-info border-1 border-info px-6 py-2 rounded-lg font-medium shadow-drop hover:bg-info/90 hover:text-white transition"
                         >
                             Preview
-                        </Button>
+                        </Button> */}
+                        <PrimaryOutlineButton
+                            onClick={() => { handlePreview() }}>
+                            Preview
+                        </PrimaryOutlineButton>
+
 
                         <div className="relative">
                             <Button
@@ -148,60 +175,81 @@ export function ArticleCreationOptions() {
             </div>
 
             {/* Main Content */}
-            <div className="flex flex-col items-center justify-center min-h-[calc(80vh-80px)] px-6">
-                <div className="text-center mb-6">
-                    <h1 className="text-2xl font-semibold text-gray-900 mb-2">
-                        Start creating your article
-                    </h1>
-                    <p className="text-gray-600">
-                        Create by your own or from ready template
-                    </p>
+
+            {currentArticleWrittingMethod === 'root' ?
+                <div className="flex flex-col items-center justify-center min-h-[calc(80vh-80px)] px-6">
+                    <div className="text-center mb-6">
+                        <h1 className="text-2xl font-semibold text-gray-900 mb-2">
+                            Start creating your article
+                        </h1>
+                        <p className="text-gray-600">
+                            Create by your own or from ready template
+                        </p>
+                    </div>
+
+                    <div className="flex gap-6">
+                        <Button
+                            variant="outline"
+                            className="flex items-center gap-3 h-auto p-3 min-w-[160px] border-1 border-info"
+                            onClick={handleStartFromScratch}
+                        >
+                            <Image
+                                src="/icons/StartFromScratch.png"
+                                alt="StartFromScratch"
+                                width={16}
+                                height={16}
+                            />
+                            <span className="text-info">Start from scratch</span>
+                        </Button>
+
+                        <Button
+                            variant="outline"
+                            className="flex items-center gap-3 h-auto p-3 min-w-[160px] border-1 border-info"
+                            onClick={handleReadyTemplate}
+                        >
+                            <Image
+                                src="/icons/ReadyTemplate.png"
+                                alt="ReadyTemplate"
+                                width={16}
+                                height={16}
+                            />
+                            <span className="text-info">Ready Template</span>
+                        </Button>
+
+                        <Button
+                            variant="outline"
+                            className="flex items-center gap-3 h-auto p-3 min-w-[160px] border-1 border-info"
+                            onClick={handleImportFile}
+                        >
+                            <Image
+                                src="/icons/ImportFile.png"
+                                alt="ImportFile"
+                                width={16}
+                                height={16}
+                            />
+                            <span className="text-info">Import File</span>
+                        </Button>
+                    </div>
                 </div>
-
-                <div className="flex gap-6">
-                    <Button
-                        variant="outline"
-                        className="flex items-center gap-3 h-auto p-3 min-w-[160px] border-1 border-info"
-                        onClick={handleStartFromScratch}
-                    >
-                        <Image
-                            src="/icons/StartFromScratch.png"
-                            alt="StartFromScratch"
-                            width={16}
-                            height={16}
+                :
+                currentArticleWrittingMethod === 'scratch' ?
+                    <div className="container mx-auto p-6">
+                        <RichTextEditor
+                            value={articleContent}
+                            onChange={setArticleContent}
+                            placeholder="Write something amazing..."
                         />
-                        <span className="text-info">Start from scratch</span>
-                    </Button>
+                        {/* <div className="mt-4">
+                            <h2 className="text-lg font-semibold">Output:</h2>
+                            <div dangerouslySetInnerHTML={{ __html: content }} />
+                        </div> */}
+                    </div>
+                    :
+                    <></>
+            }
 
-                    <Button
-                        variant="outline"
-                        className="flex items-center gap-3 h-auto p-3 min-w-[160px] border-1 border-info"
-                        onClick={handleReadyTemplate}
-                    >
-                        <Image
-                            src="/icons/ReadyTemplate.png"
-                            alt="ReadyTemplate"
-                            width={16}
-                            height={16}
-                        />
-                        <span className="text-info">Ready Template</span>
-                    </Button>
 
-                    <Button
-                        variant="outline"
-                        className="flex items-center gap-3 h-auto p-3 min-w-[160px] border-1 border-info"
-                        onClick={handleImportFile}
-                    >
-                        <Image
-                            src="/icons/ImportFile.png"
-                            alt="ImportFile"
-                            width={16}
-                            height={16}
-                        />
-                        <span className="text-info">Import File</span>
-                    </Button>
-                </div>
-            </div>
+
         </>
     )
 }

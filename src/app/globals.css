@@ -26,8 +26,11 @@
   /* Alert Colors */
   --color-info: #4378FF;
   --color-success: #34B967;
+  --color-success-bg: #EBF5F0;
   --color-warning: #F29C4C;
+  --color-warning-bg: #FEF5ED;
   --color-error: #DA5850;
+  --color-error-bg: rgba(218,88,80,0.1);
 
   /* Font Sizes */
   --text-48: 48px;

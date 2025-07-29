@@ -3,6 +3,7 @@
 
 import ArticleHeader from "@/components/articles/article-header";
 import ArticlesGrid from "@/components/articles/articles-grid"
+import { CreateArticleModal } from "@/components/articles/create-article-modal";
 import { EmptyStateWithCreate } from "@/components/EmptyStateWithCreate"
 import { useEffect, useState } from "react"
 
@@ -10,6 +11,7 @@ export default function ArticlesPage() {
     const [hasArticles, setHasArticles] = useState(false);
     const [activeTab, setActiveTab] = useState<"my" | "all">("my");
     const [searchQuery, setSearchQuery] = useState("");
+    const [openCreateArticleModal, setOpenCreateArticleModal] = useState<boolean>(false);
 
 
     // Check if user has articles - replace with your actual logic
@@ -21,11 +23,18 @@ export default function ArticlesPage() {
 
 
     const handleCreateNewArticle = () => {
-
+        setOpenCreateArticleModal(true);
     };
 
     return (
         <>
+            {openCreateArticleModal &&
+                <CreateArticleModal
+                    isOpen={openCreateArticleModal}
+                    onClose={() => setOpenCreateArticleModal(false)}
+                />
+
+            }
             <ArticleHeader
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}

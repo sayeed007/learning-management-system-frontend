@@ -11,11 +11,11 @@ export const StatusBadge = ({ status, percentage }: StatusBadgeProps) => {
 
     switch (status) {
         case 'Complete':
-            return <Badge className="bg-green-100 text-green-800 hover:bg-green-100">Complete</Badge>;
+            return <Badge className="bg-success-bg text-success hover:bg-success hover:text-white">Complete</Badge>;
         case 'In Progress':
-            return <Badge className="bg-orange-100 text-orange-800 hover:bg-orange-100">In Progress</Badge>;
+            return <Badge className="bg-warning-bg text-warning hover:bg-warning hover:text-white">In Progress</Badge>;
         case 'Yet to Start':
-            return <Badge className="bg-red-100 text-red-800 hover:bg-red-100">Yet to Start</Badge>;
+            return <Badge className="bg-error-bg text-error hover:bg-error hover:text-white">Yet to Start</Badge>;
         default:
             return <Badge className="bg-gray-100 text-gray-800 hover:bg-gray-100">{status}</Badge>;
     }

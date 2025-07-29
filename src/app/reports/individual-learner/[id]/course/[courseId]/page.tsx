@@ -94,7 +94,7 @@ export default function IndividualCourseReport() {
                 </div>
 
                 <div className="flex flex-1 items-center justify-end gap-8">
-                    <Card className="p-6 flex-1">
+                    <Card className="p-2 flex-1">
                         <div className="flex items-center space-x-4">
                             <div className="p-3 bg-green-100 rounded-lg">
                                 <CheckCircle className="h-8 w-8 text-green-600" />
@@ -106,7 +106,7 @@ export default function IndividualCourseReport() {
                         </div>
                     </Card>
 
-                    <Card className="p-6 flex-1">
+                    <Card className="p-2 flex-1">
                         <div className="flex items-center space-x-4">
                             <div className="p-3 bg-orange-100 rounded-lg">
                                 <Clock className="h-8 w-8 text-orange-600" />

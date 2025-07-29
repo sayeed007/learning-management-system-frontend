@@ -36,14 +36,14 @@ export function CreateArticleModal({ isOpen, onClose }: CreateArticleModalProps)
 
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
-            <DialogContent className="sm:max-w-md">
-                <DialogHeader>
+            <DialogContent className="sm:max-w-xl">
+                <DialogHeader className="border-b-2 border-off-white-4">
                     <DialogTitle className="text-xl font-semibold">Create Article</DialogTitle>
                 </DialogHeader>
 
                 <div className="space-y-4">
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-gray-700 mb-2 ">
                             Article Name
                         </label>
                         <Input
@@ -56,12 +56,15 @@ export function CreateArticleModal({ isOpen, onClose }: CreateArticleModalProps)
 
                     <div className="flex gap-3 pt-4">
                         <Button
+                            variant="ghost"
+                            size="sm"
                             onClick={handleCreateNow}
                             disabled={!articleName.trim()}
-                            className="px-8"
+                            className="cursor-pointer bg-info text-white px-6 py-2 rounded-lg font-medium shadow-drop hover:bg-info/90 transition"
                         >
                             Create Now
                         </Button>
+
                         <Button
                             variant="ghost"
                             onClick={handleCancel}

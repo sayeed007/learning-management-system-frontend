@@ -3,8 +3,11 @@ import { StatsCard } from '@/components/reports/StatsCard'
 import { StatusBadge } from '@/components/reports/StatusBadge'
 import { Button } from '@/components/ui/button'
 import { ChevronRight, Download } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
 export default function MyReportPage() {
+    const router = useRouter();
+    const learnerId = '1';
     const courses = [
         {
             id: 1,
@@ -13,7 +16,7 @@ export default function MyReportPage() {
             completedDate: "Jan 23, 2025",
             timeSpent: "2 days 13 hour",
             completion: 50,
-            status: "In Progress"
+            status: "Yet to Start"
         },
         {
             id: 2,
@@ -105,7 +108,11 @@ export default function MyReportPage() {
             completion: 100,
             status: "Complete"
         }
-    ]
+    ];
+
+    const handleCourseClick = (courseId: number) => {
+        router.push(`/reports/individual-learner/${learnerId}/course/${courseId}`);
+    };
 
 
     return (
@@ -134,7 +141,7 @@ export default function MyReportPage() {
                 <StatsCard
                     iconName={'/icons/YetToStart.png'}
                     iconAlt="YetToStart"
-                    title="Yet To Start"
+                    title="Yet to Start"
                     value={0}
                 />
 
@@ -172,7 +179,11 @@ export default function MyReportPage() {
                         <tbody className="bg-white divide-y divide-gray-200">
                             {
                                 courses.map((course, index) => (
-                                    <tr key={course.id} className="hover:bg-gray-50">
+                                    <tr
+                                        key={course.id}
+                                        onClick={() => handleCourseClick(course.id)}
+                                        className="hover:bg-gray-50"
+                                    >
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900"> {index + 1} </td>
                                         <td className="px-6 py-4 text-sm text-gray-900"> {course.name} </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900"> {course.enrollDate} </td>

@@ -37,7 +37,7 @@ export function EmptyStateWithCreate({
           variant="ghost"
           size="sm"
           onClick={onClick}
-          className="bg-info text-white px-6 py-2 rounded-lg font-medium shadow-drop hover:bg-info/90 transition"
+          className="cursor-pointer bg-info text-white px-6 py-2 rounded-lg font-medium shadow-drop hover:bg-info/90 transition"
         >
           {" "}
           {buttonText}

@@ -2,7 +2,7 @@
 import { getInitials } from "@/lib/utils"; // From your previous request
 import { Article } from "@/types";
 
-const placeholderImageURL = process.env.NEXT_PUBLIC_DEFAULT_AVATAR_URL || "https://picsum.photos/200?random=";
+const placeholderImageURL = process.env.NEXT_PUBLIC_DEFAULT_AVATAR_URL || "https://picsum.photos/300/200?random=";
 
 
 // Generate 10 realistic articles

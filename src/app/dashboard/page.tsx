@@ -109,7 +109,7 @@ export default function DashboardPage() {
               ◀
             </button>
             <div className="flex gap-4 overflow-x-auto">
-              {visibleCourses.map((course, idx) => (
+              {visibleCourses.map((course) => (
                 <div
                   key={course.title}
                   className="bg-white rounded-xl shadow w-80 min-w-[320px] flex-shrink-0"

@@ -2,9 +2,9 @@
 import ArticlePreviewPage from "@/components/articles/ArticlePreviewPage";
 
 interface PageProps {
-    params: {
-        article_name: string;
-    };
+    // params: {
+    //     article_name: string;
+    // };
     searchParams: Promise<{
         content?: string;
         title?: string;
@@ -13,7 +13,10 @@ interface PageProps {
     }>;
 }
 
-export default async function ArticlePreview({ params, searchParams }: PageProps) {
+export default async function ArticlePreview({
+    // params,
+    searchParams
+}: PageProps) {
     // Await searchParams to resolve the Promise
     const resolvedSearchParams = await searchParams;
 
@@ -40,8 +43,6 @@ export default async function ArticlePreview({ params, searchParams }: PageProps
             articleTitle={articleTitle}
             authorName={authorName}
             category={category}
-            canExport={true}
-            seeComments={true}
         />
     );
 }

@@ -20,8 +20,10 @@ const AvatarImage = React.forwardRef<
     HTMLImageElement,
     React.ImgHTMLAttributes<HTMLImageElement>
 >(({ className, ...props }, ref) => (
+    // eslint-disable-next-line @next/next/no-img-element
     <img
         ref={ref}
+        alt={props?.alt || ''}
         className={`aspect-square h-full w-full ${className || ''}`}
         {...props}
     />
@@ -40,4 +42,5 @@ const AvatarFallback = React.forwardRef<
 ))
 AvatarFallback.displayName = "AvatarFallback"
 
-export { Avatar, AvatarImage, AvatarFallback }
+export { Avatar, AvatarFallback, AvatarImage }
+

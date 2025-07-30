@@ -1,8 +1,7 @@
 "use client";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { AddChapterModal } from "@/components/AddChapterModal";
-import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 // Dummy course data for now
 const course = {
@@ -76,7 +75,7 @@ export default function CourseDetailPage() {
           <div className="flex flex-wrap gap-4 text-sm text-gray-700 mt-4">
             <span>{course.chapters} Chapter</span>
             <span>{course.lessons} Lesson</span>
-            <span>{course.quizzes} Quiz's</span>
+            <span>{course.quizzes}{" Quiz's"}</span>
             <span>{course.hours} Hours</span>
             <span className="text-white bg-gray-800 px-2 py-1 rounded">
               {course.difficulty}

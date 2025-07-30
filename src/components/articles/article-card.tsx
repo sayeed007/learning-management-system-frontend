@@ -1,11 +1,11 @@
 // components/articles/article-card.tsx
 import { cn, monthDateYearFormat } from "@/lib/utils"
 import { Article } from "@/types"
-import { Calendar, EllipsisVertical, Eye, User } from "lucide-react"
+import { Calendar, Eye } from "lucide-react"
 import Image from "next/image"
+import { useState } from "react"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 import { ArticleCardAction } from "./ArticleCardAction"
-import { useState } from "react"
 
 interface ArticleCardProps {
     article: Article

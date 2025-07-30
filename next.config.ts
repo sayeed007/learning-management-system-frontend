@@ -1,7 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "standalone",
-  webpack: (config) => {
+  webpack: (config: import("webpack").Configuration) => {
+    // Ensure config.module exists
+    if (!config.module) {
+      config.module = {};
+    }
+    // Ensure config.module.rules exists
+    if (!config.module.rules) {
+      config.module.rules = [];
+    }
+
     config.module.rules.push({
       test: /\.svg$/i,
       use: ["@svgr/webpack"],

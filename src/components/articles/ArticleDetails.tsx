@@ -22,6 +22,7 @@ const SingleArticleDetails = ({ article }: SingleArticleDetailsProps) => {
     const [hasVoted, setHasVoted] = useState(false);
     const [voteType, setVoteType] = useState<'yes' | 'no' | null>(null);
     const [localVotes, setLocalVotes] = useState(article.votes);
+    console.info(voteType);
 
     // Use editor content if provided, otherwise use mock content
     const displayContent = article.content;

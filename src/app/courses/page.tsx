@@ -6,22 +6,6 @@ import { EmptyStateWithCreate } from "@/components/EmptyStateWithCreate";
 import { CourseDetails } from "@/types";
 import { useState } from "react";
 
-// Example course type
-const initialCourses: CourseDetails[] = [
-  // Example data, replace with real data or state
-  {
-    id: "1",
-    name: "UI/UX Roadmap",
-    category: "Design & Development",
-    description: "Equip learners with foundational to intermediate knowledge of UI/UX principles, visual design standards, usability heuristics...",
-    difficulty: "Beginner",
-    chapters: 4,
-    lessons: 15,
-    quizzes: 2,
-    image: "/Thumbnail.png",
-  },
-];
-
 // Example course data
 const allCourses = [
   {

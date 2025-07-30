@@ -18,7 +18,7 @@ export default function ArticlesPage() {
     useEffect(() => {
         // For demo purposes, set to true to show the grid
         // Set to false to show empty state
-        setHasArticles(false);
+        setHasArticles(true);
     }, []);
 
 

@@ -2,11 +2,21 @@
 import { GoBackRoute } from '@/components/reports/GoBackRoute'
 import { StatsCard } from '@/components/reports/StatsCard'
 import { Button } from '@/components/ui/button'
-import type { Article, ReportStats } from '@/types'
+import type { ReportStats } from '@/types'
 import { Download } from 'lucide-react'
 
+interface ArticleReportTypes {
+    id: number;
+    name: string;
+    totalViewer: number;
+    comments: number;
+    rating: number;
+    yesRating: number;
+    noRating: number;
+}
+
 // Mock data - replace with your actual data fetching
-const mockData: { stats: ReportStats; articles: Article[] } = {
+const mockData: { stats: ReportStats; articles: ArticleReportTypes[] } = {
     stats: {
         total: 65,
         published: 45,

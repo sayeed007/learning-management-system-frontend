@@ -1,15 +1,10 @@
 "use client"
 import { useState } from "react";
-import { Header } from "@/components/Header";
 import { ProfileTab } from "@/components/profile/ProfileTab";
 import { LogoutModal } from "@/components/profile/LogoutModal";
 import { NotificationSettingTab } from "@/components/profile/NotificationSettingTab";
 import { ManageCategoriesTab } from "@/components/profile/ManageCategoriesTab";
 import { AuditLogTab } from "@/components/profile/AuditLogTab";
-// import { NotificationSettingTab } from "@/components/profile/NotificationSettingTab";
-// import { ManageCategoriesTab } from "@/components/profile/ManageCategoriesTab";
-// import { AuditLogTab } from "@/components/profile/AuditLogTab";
-// import { LogoutModal } from "@/components/profile/LogoutModal";
 
 const sidebarLinks = [
     { label: "Profile" },
@@ -24,7 +19,6 @@ export default function ProfilePage() {
 
     return (
         <div className="min-h-screen bg-off-white-1 flex flex-col">
-            <Header />
             <LogoutModal
                 open={logoutOpen}
                 onOpenChange={setLogoutOpen}

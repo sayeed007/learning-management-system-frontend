@@ -1,9 +1,8 @@
 "use client"
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-import { NotificationModal } from '../NotificationModal';
+import { useEffect, useState } from 'react';
 import { NotificationPopover } from '../NotificationPopover';
 
 const navItems = [
@@ -17,7 +16,6 @@ const navItems = [
 const Header = () => {
     const [activeLink, setActiveLink] = useState('dashboard');
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [openNotificationModal, setOpenNotificationModal] = useState(false);
 
     const pathname = usePathname();
     const router = useRouter();
@@ -77,20 +75,6 @@ const Header = () => {
                         className="relative hover:scale-110 transition-transform"
                         aria-label="Notifications"
                     >
-                        {/* <Image
-                            src="/icons/Bell.png"
-                            alt="Notifications"
-                            width={28}
-                            height={28}
-                            className="w-6 h-6 sm:w-7 sm:h-7"
-                            onClick={() => { setOpenNotificationModal(true) }}
-                        />
-
-                        <NotificationModal
-                            open={openNotificationModal}
-                            onOpenChange={() => setOpenNotificationModal(false)}
-                        /> */}
-
                         <NotificationPopover>
                             <Image
                                 src="/icons/Bell.png"

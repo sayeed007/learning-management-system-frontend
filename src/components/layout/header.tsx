@@ -2,7 +2,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { NotificationModal } from '../NotificationModal';
+import { NotificationPopover } from '../NotificationPopover';
 
 const navItems = [
     { name: 'Dashboard', href: '/dashboard' },
@@ -15,7 +17,10 @@ const navItems = [
 const Header = () => {
     const [activeLink, setActiveLink] = useState('dashboard');
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [openNotificationModal, setOpenNotificationModal] = useState(false);
+
     const pathname = usePathname();
+    const router = useRouter();
 
     useEffect(() => {
         const currentPath = pathname.split('/')[1] || 'dashboard';
@@ -34,7 +39,10 @@ const Header = () => {
         <header className="bg-gradient-to-r from-gradient-start to-gradient-end text-gray-700 mb-6 sticky top-0 z-50 shadow-sm">
             <div className="flex justify-between items-center px-4 py-4 lg:px-8">
                 {/* Logo */}
-                <div className="flex-shrink-0">
+                <div
+                    className="flex-shrink-0"
+                    onClick={() => router.push('/')}
+                >
                     <Image
                         src="/TafuriHR_logo.png"
                         alt="Tafuri HR Logo"
@@ -69,13 +77,29 @@ const Header = () => {
                         className="relative hover:scale-110 transition-transform"
                         aria-label="Notifications"
                     >
-                        <Image
+                        {/* <Image
                             src="/icons/Bell.png"
                             alt="Notifications"
                             width={28}
                             height={28}
                             className="w-6 h-6 sm:w-7 sm:h-7"
+                            onClick={() => { setOpenNotificationModal(true) }}
                         />
+
+                        <NotificationModal
+                            open={openNotificationModal}
+                            onOpenChange={() => setOpenNotificationModal(false)}
+                        /> */}
+
+                        <NotificationPopover>
+                            <Image
+                                src="/icons/Bell.png"
+                                alt="Notifications"
+                                width={28}
+                                height={28}
+                                className="w-6 h-6 sm:w-7 sm:h-7"
+                            />
+                        </NotificationPopover>
                     </button>
 
                     {/* User Profile - Hidden on small screens */}
@@ -87,6 +111,7 @@ const Header = () => {
                             width={32}
                             height={32}
                             className="rounded-full w-7 h-7 sm:w-8 sm:h-8"
+                            onClick={() => router.push('/profile')}
                         />
                     </div>
 

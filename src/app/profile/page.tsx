@@ -29,7 +29,7 @@ export default function ProfilePage() {
             />
             <div className="flex flex-1">
                 {/* Sidebar */}
-                <aside className="w-64 bg-transparent p-10 pt-20">
+                <aside className="w-64 bg-transparent p-10">
                     <div className="mb-8">
                         <div className="text-20 font-bold text-dark">Welcome, Hafiz</div>
                         <div className="text-14 text-grey-2">Manage your info updated</div>

@@ -1,4 +1,5 @@
 import { clsx, type ClassValue } from "clsx"
+import moment from "moment";
 import { twMerge } from "tailwind-merge"
 
 export function cn(...inputs: ClassValue[]) {
@@ -18,3 +19,8 @@ export function getInitials(name: string): string {
   
   return initials || "NA"; // Fallback if name is empty
 }
+
+
+export const monthDateYearFormat = (date: string): string => {
+  return moment(date).format("MMM DD, YYYY");
+};

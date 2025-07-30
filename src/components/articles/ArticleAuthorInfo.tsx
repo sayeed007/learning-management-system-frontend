@@ -1,7 +1,7 @@
 'use client';
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { getInitials } from "@/lib/utils";
+import { cn, getInitials } from "@/lib/utils";
 import { Calendar, Eye } from "lucide-react";
 
 
@@ -11,13 +11,17 @@ interface ArticleAuthorInfoProps {
     publishDate: string;
     publishTime: string;
     views?: number;
+    comment?: string
 }
 
-export const ArticleAuthorInfo = ({ authorName, authorAvatar, publishDate, publishTime, views }: ArticleAuthorInfoProps) => {
+export const ArticleAuthorInfo = ({ authorName, authorAvatar, publishDate, publishTime, views, comment }: ArticleAuthorInfoProps) => {
 
     const authorInitials = getInitials(authorName);
     return (
-        <div className="flex items-center gap-4 text-sm">
+        <div className={cn(
+            "flex gap-4 text-sm",
+            !comment && 'items-center'
+        )}>
             <Avatar className="w-8 h-8">
                 <AvatarImage src={authorAvatar} />
                 <AvatarFallback className="bg-blue-100 text-blue-600 text-xs">
@@ -26,7 +30,7 @@ export const ArticleAuthorInfo = ({ authorName, authorAvatar, publishDate, publi
             </Avatar>
 
             <div className="flex flex-col">
-                <div className="font-medium text-gray-900">{authorName}</div>
+                <div className="font-bold text-gray-900">{authorName}</div>
 
                 <div className="flex gap-4">
                     <div className="flex items-center gap-1">
@@ -41,7 +45,13 @@ export const ArticleAuthorInfo = ({ authorName, authorAvatar, publishDate, publi
                         </div>
                     )}
                 </div>
+
+                {comment &&
+                    <p className="mt-3 text-gray-700 leading-relaxed">{comment}</p>
+                }
             </div>
+
+
         </div>
     );
 }

@@ -94,18 +94,44 @@ export interface CourseSummary {
   completed: number
 }
 
-export interface Article {
-  id: number
-  name: string
-  totalViewer: number
-  comments: number
-  rating: number
-  yesRating: number
-  noRating: number
-}
-
 export interface ReportStats {
   total: number
   published: number
   unpublished: number
+}
+
+
+
+// Define the Article interface to match the merged structure
+export interface Author {
+  name: string;
+  avatar: string;
+  initials: string;
+}
+
+export interface Comment {
+  id: number;
+  author: Author;
+  date: string;
+  time: string;
+  content: string;
+}
+
+export interface Article {
+  id: string;
+  title: string;
+  category: string;
+  author: Author;
+  publishDate: string;
+  publishTime: string;
+  views: number;
+  thumbnail: string;
+  myArticle: boolean;
+  isPublished: boolean;
+  content: string;
+  votes: {
+    yes: number;
+    no: number;
+  };
+  comments: Comment[];
 }

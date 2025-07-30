@@ -1,28 +1,48 @@
 // components/articles/article-card.tsx
-import { Calendar, Eye, User } from "lucide-react"
+import { cn, monthDateYearFormat } from "@/lib/utils"
+import { Article } from "@/types"
+import { Calendar, EllipsisVertical, Eye, User } from "lucide-react"
 import Image from "next/image"
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
+import { ArticleCardAction } from "./ArticleCardAction"
+import { useState } from "react"
 
 interface ArticleCardProps {
-    id: string
-    title: string
-    author?: string
-    date: string
-    views: number
-    thumbnail: string
+    article: Article
+    isMyArticle: boolean
     onClick?: () => void
 }
 
+
 export function ArticleCard({
-    title,
-    author,
-    date,
-    views,
-    thumbnail,
+    article,
+    isMyArticle,
     onClick
 }: ArticleCardProps) {
+    const { thumbnail, title, author, publishDate, views, isPublished } = article;
+    const { name, avatar, initials } = author;
+    const [showActionPopup, setShowActionPopup] = useState<boolean>(false);
+
+    const handleEditArticle = () => {
+
+    };
+
+    const handleMandatoryRead = () => {
+
+    };
+
+    const handleDuplicate = () => {
+
+    };
+
+    const handleDeleteArticle = () => {
+
+    };
+
+
     return (
         <div
-            className="bg-white rounded-2xl border-off-white-2 shadow-1 border p-2 hover:shadow-md transition-shadow cursor-pointer"
+            className="bg-white rounded-2xl border-off-white-2 shadow-1 border p-2 cursor-pointer flex flex-col justify-between hover:shadow-md transition-shadow "
             onClick={onClick}
         >
             <div className="relative aspect-video overflow-hidden rounded-t-lg">
@@ -32,29 +52,84 @@ export function ArticleCard({
                     className="object-cover"
                     fill
                 />
-            </div>
 
-            <h3 className="font-semibold text-gray-900 mb-3 line-clamp-2 py-4">
-                {title}
-            </h3>
+                {isMyArticle &&
+                    <>
+                        {/* Left POSITIONING - Publish Status */}
+                        <div className={cn(
+                            "z-10 absolute left-2 top-2 px-2 py-1 rounded-3xl text-xs",
+                            isPublished ? 'bg-black text-white' : 'bg-warning-bg text-warning'
+                        )}>
+                            {isPublished ? 'Published' : 'Draft'}
+                        </div>
 
-            <div className="py-4 border-t-1 border-off-white-5">
-                {author &&
-                    <div className="flex items-center gap-2 text-sm text-gray-600 mb-2">
-                        <User className="w-4 h-4" />
-                        <span>{author}</span>
-                    </div>
+
+                        {/* RIGHT POSITIONING - Action Buttons */}
+                        <>
+                            <div
+                                className="z-10 absolute right-2 top-1 cursor-pointer p-1 rounded-full hover:bg-black/10 transition-all duration-200"
+                                data-action-trigger="true"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    setShowActionPopup(prev => {
+                                        return !prev
+                                    });
+                                }}
+                            >
+                                <Image
+                                    src={'/Icons/ActionThreeDots.png'}
+                                    alt={'ActionThreeDots'}
+                                    height={24}
+                                    width={24}
+                                    className="transform transition-transform duration-200 hover:scale-130"
+                                />
+                            </div>
+
+                            <ArticleCardAction
+                                isOpen={showActionPopup}
+                                onClose={() => {
+                                    setShowActionPopup(false)
+                                }}
+                                onEditArticle={handleEditArticle}
+                                onDuplicate={handleDuplicate}
+                                onMandatoryRead={handleMandatoryRead}
+                                onDeleteArticle={handleDeleteArticle}
+                            />
+                        </>
+                    </>
                 }
 
-                <div className="flex items-center justify-between text-sm text-gray-500">
-                    <div className="flex items-center gap-1">
-                        <Calendar className="w-4 h-4" />
-                        <span>{date}</span>
+
+            </div>
+
+            <div className="my-2">
+                <h3 className="font-semibold text-gray-900 line-clamp-2">
+                    {title}
+                </h3>
+
+                {!isMyArticle &&
+                    <div className="flex items-center gap-2 text-sm text-gray-600">
+                        <Avatar className="w-5 h-5">
+                            <AvatarImage src={avatar} />
+                            <AvatarFallback className="bg-blue-100 text-blue-600 text-xs">
+                                {initials}
+                            </AvatarFallback>
+                        </Avatar>
+                        <span>{name}</span>
                     </div>
-                    <div className="flex items-center gap-1">
-                        <Eye className="w-4 h-4" />
-                        <span>{views}</span>
-                    </div>
+                }
+            </div>
+
+
+            <div className="mt-4 flex justify-between py-2 border-t-1 border-off-white-5 text-sm text-gray-500">
+                <div className="flex items-center gap-1">
+                    <Calendar className="w-4 h-4" />
+                    <span>{monthDateYearFormat(publishDate)}</span>
+                </div>
+                <div className="flex items-center gap-1">
+                    <Eye className="w-4 h-4" />
+                    <span>{views}</span>
                 </div>
             </div>
         </div>

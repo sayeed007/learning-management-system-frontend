@@ -5,33 +5,35 @@ import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { useEffect, useRef } from "react"
 
-interface MoreOptionsPopupProps {
+interface ArticleCardActionProps {
     isOpen: boolean
     onClose: () => void
-    onSaveAsDraft: () => void
+    onEditArticle: () => void
+    onDuplicate: () => void
     onMandatoryRead: () => void
-    onAddThumbnail: () => void
-    onAdvancedSetting: () => void
+    onDeleteArticle: () => void
 }
 
-export function MoreOptionsPopup({
+export function ArticleCardAction({
     isOpen,
     onClose,
-    onSaveAsDraft,
+    onEditArticle,
+    onDuplicate,
     onMandatoryRead,
-    onAddThumbnail,
-    onAdvancedSetting
-}: MoreOptionsPopupProps) {
+    onDeleteArticle
+}: ArticleCardActionProps) {
     const popupRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-
-            // Check if the clicked element is the More button or its children
             const target = event.target as Element
-            const moreButton = target.closest('button')
 
-            if (moreButton && moreButton.textContent?.trim() === 'More') {
+            // Check if the clicked element is the three dots action image or its parent
+            const actionImage = target.closest('[data-action-trigger="true"]')
+            const isActionImage = target.getAttribute('alt') === 'ActionThreeDots' ||
+                target.getAttribute('src')?.includes('ActionThreeDots.png')
+
+            if (actionImage || isActionImage) {
                 return
             }
 
@@ -57,12 +59,13 @@ export function MoreOptionsPopup({
         }
     }, [isOpen, onClose])
 
+
     if (!isOpen) return null
 
     return (
         <div
             ref={popupRef}
-            className="absolute top-full right-0 mt-2 bg-white rounded-lg shadow-xl border border-gray-200 min-w-[200px] py-2 z-50"
+            className="absolute right-8 mt-2 bg-white rounded-lg shadow-xl border border-gray-200 min-w-[200px] py-2 z-50"
             onClick={(e) => e.stopPropagation()} // Prevent clicks inside popup from bubbling
         >
             <div className="flex flex-col px-4">
@@ -70,17 +73,34 @@ export function MoreOptionsPopup({
                     variant="ghost"
                     className="flex items-center gap-3 px-0 py-3 text-left justify-start hover:bg-off-white-3 rounded-none border-b-1 border-off-white-4"
                     onClick={() => {
-                        onSaveAsDraft()
+                        onEditArticle()
                         onClose()
                     }}
                 >
                     <Image
-                        src="/icons/SaveAsDraft.png"
-                        alt="SaveAsDraft"
+                        src="/icons/Edit.png"
+                        alt="Edit"
                         width={24}
                         height={24}
                     />
-                    <span className="text-gray-700 text-sm">Save as Draft</span>
+                    <span className="text-gray-700 text-sm">Edit Article</span>
+                </Button>
+
+                <Button
+                    variant="ghost"
+                    className="flex items-center gap-3 px-0 py-3 text-left justify-start hover:bg-off-white-3 rounded-none border-b-1 border-off-white-4"
+                    onClick={() => {
+                        onDuplicate()
+                        onClose()
+                    }}
+                >
+                    <Image
+                        src="/icons/Duplicate.png"
+                        alt="Duplicate"
+                        width={24}
+                        height={24}
+                    />
+                    <span className="text-gray-700 text-sm">Duplicate</span>
                 </Button>
 
                 <Button
@@ -100,38 +120,23 @@ export function MoreOptionsPopup({
                     <span className="text-gray-700 text-sm">Mandatory Read</span>
                 </Button>
 
-                <Button
-                    variant="ghost"
-                    className="flex items-center gap-3 px-0 py-3 text-left justify-start hover:bg-off-white-3 rounded-none border-b-1 border-off-white-4"
-                    onClick={() => {
-                        onAddThumbnail()
-                        onClose()
-                    }}
-                >
-                    <Image
-                        src="/icons/AddThumbnail.png"
-                        alt="AddThumbnail"
-                        width={24}
-                        height={24}
-                    />
-                    <span className="text-gray-700 text-sm">Add Thumbnail</span>
-                </Button>
+
 
                 <Button
                     variant="ghost"
-                    className="flex items-center gap-3 px-0 py-3 text-left justify-start hover:bg-off-white-3 rounded-none"
+                    className="flex items-center gap-3 px-0 py-3 text-left justify-start hover:bg-off-white-3 rounded-none "
                     onClick={() => {
-                        onAdvancedSetting()
+                        onDeleteArticle()
                         onClose()
                     }}
                 >
                     <Image
-                        src="/icons/AdvancedSetting.png"
-                        alt="AdvancedSetting"
+                        src="/icons/Delete.png"
+                        alt="Delete"
                         width={24}
                         height={24}
                     />
-                    <span className="text-gray-700 text-sm">Advanced Setting</span>
+                    <span className="text-gray-700 text-sm">Delete Article</span>
                 </Button>
             </div>
         </div>

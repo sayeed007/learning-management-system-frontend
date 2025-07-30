@@ -2,16 +2,9 @@
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { dummyArticles } from "@/dummyData/articles";
 
-const article = {
-    id: "1",
-    title: "Database for Software Developers",
-    author: "Sufian Huzaif",
-    date: "Apr 24, 2024",
-    views: 125,
-    thumbnail: "/Thumbnail.png",
-    content: `<p>In today's technology-driven world, understanding databases is no longer optional for software developers...</p>`
-};
+const article = dummyArticles[0];
 
 export default function ArticleDetailPage() {
     const router = useRouter();
@@ -27,9 +20,9 @@ export default function ArticleDetailPage() {
                 />
                 <div className="text-2xl font-bold text-dark mb-2">{article.title}</div>
                 <div className="flex items-center gap-4 text-grey-2 text-sm mb-2">
-                    <span>By {article.author}</span>
+                    <span>By {article.author.name}</span>
                     <span>•</span>
-                    <span>{article.date}</span>
+                    <span>{article.publishDate}</span>
                     <span>•</span>
                     <span className="flex items-center gap-1">
                         <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M1 12C1 12 5 5 12 5s11 7 11 7-4 7-11 7S1 12 1 12Z" stroke="#A0AEC0" strokeWidth="2" /><circle cx="12" cy="12" r="3" stroke="#A0AEC0" strokeWidth="2" /></svg>
@@ -38,7 +31,7 @@ export default function ArticleDetailPage() {
                 </div>
                 <div className="flex gap-4 mb-6">
                     <button className="bg-info text-white px-6 py-2 rounded-lg font-semibold shadow hover:bg-info/90 transition">Export</button>
-                    <Link href={`/article/${article.id}/edit`} legacyBehavior>
+                    <Link href={`/article/${article.id}/edit`}>
                         <a className="px-6 py-2 rounded-lg border text-dark hover:bg-off-white-4">Edit Article</a>
                     </Link>
                 </div>

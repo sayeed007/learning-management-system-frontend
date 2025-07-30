@@ -46,6 +46,7 @@ export default function ArticlesPage() {
                 <ArticlesGrid
                     activeTab={activeTab}
                     searchQuery={searchQuery}
+                    handleCreateNewArticle={handleCreateNewArticle}
                 />
                 :
                 <EmptyStateWithCreate

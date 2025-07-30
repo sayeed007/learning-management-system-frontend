@@ -1,6 +1,7 @@
 import { Search } from "lucide-react"
 import { Input } from "../ui/input"
 import { Dispatch, SetStateAction } from "react"
+import PrimaryActionButton from "../ui/PrimaryButton";
 
 // Define the props interface
 interface ArticleHeaderProps {

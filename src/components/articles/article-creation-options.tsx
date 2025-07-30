@@ -2,15 +2,16 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Download, FileText, Layout } from "lucide-react"
 import Image from "next/image"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useState } from "react"
 import { GoBackRoute } from "../reports/GoBackRoute"
-import { Input } from "../ui/input"
-import { MoreOptionsPopup } from "./article-more-option-popup"
 import RichTextEditor from "../RichTextEditor"
+import { Input } from "../ui/input"
 import PrimaryOutlineButton from "../ui/PrimaryOutlineButton"
+import { MoreOptionsPopup } from "./article-more-option-popup"
+import { ArticleAddThumbnailModal } from "./ArticleAddThumbnailModal"
+import { ArticleAdvancedSettingModal } from "./ArticleAdvancedSettingModal"
 
 export function ArticleCreationOptions() {
     const router = useRouter()
@@ -20,6 +21,8 @@ export function ArticleCreationOptions() {
     const [articleContent, setArticleContent] = useState('');
 
     const [currentArticleWrittingMethod, setCurrentArticleWrittingMethod] = useState<'root' | 'scratch'>('root')
+    const [showAddThumbnailModal, setShowAddThubnailModal] = useState(false);
+    const [showAdvanceSettingModal, setShowAdvanceSettingModal] = useState(true);
 
 
     const handleStartFromScratch = () => {
@@ -55,14 +58,15 @@ export function ArticleCreationOptions() {
     }
 
     const handleAddThumbnail = () => {
-        // Implement add thumbnail logic
-        console.log('Adding thumbnail...')
-        // You can add your thumbnail logic here
-    }
+        setShowAddThubnailModal(true);
+    };
+
+    const handleSaveThumbnail = () => {
+        setShowAddThubnailModal(false);
+    };
 
     const handleAdvancedSetting = () => {
-        // Navigate to advanced settings
-        router.push(`/articles/settings?name=${encodeURIComponent(articleName)}`)
+        setShowAdvanceSettingModal(true);
     }
 
     const handlePreview = () => {
@@ -126,14 +130,6 @@ export function ArticleCreationOptions() {
                             Publish
                         </Button>
 
-                        {/* <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => { handlePreview() }}
-                            className="cursor-pointer bg-background text-info border-1 border-info px-6 py-2 rounded-lg font-medium shadow-drop hover:bg-info/90 hover:text-white transition"
-                        >
-                            Preview
-                        </Button> */}
                         <PrimaryOutlineButton
                             onClick={() => { handlePreview() }}>
                             Preview
@@ -147,9 +143,7 @@ export function ArticleCreationOptions() {
                                 onClick={(e) => {
                                     e.preventDefault()
                                     e.stopPropagation()
-                                    console.log('More button clicked, current state:', showMorePopup)
                                     setShowMorePopup(prev => {
-                                        console.log('Setting showMorePopup from', prev, 'to', !prev)
                                         return !prev
                                     })
                                 }}
@@ -161,7 +155,6 @@ export function ArticleCreationOptions() {
                             <MoreOptionsPopup
                                 isOpen={showMorePopup}
                                 onClose={() => {
-                                    console.log('onClose called, setting showMorePopup to false')
                                     setShowMorePopup(false)
                                 }}
                                 onSaveAsDraft={handleSaveAsDraft}
@@ -239,15 +232,30 @@ export function ArticleCreationOptions() {
                             onChange={setArticleContent}
                             placeholder="Write something amazing..."
                         />
-                        {/* <div className="mt-4">
-                            <h2 className="text-lg font-semibold">Output:</h2>
-                            <div dangerouslySetInnerHTML={{ __html: content }} />
-                        </div> */}
                     </div>
                     :
                     <></>
             }
 
+
+
+            {/* Add Thumbnail Modal */}
+            {showAddThumbnailModal &&
+                <ArticleAddThumbnailModal
+                    open={showAddThumbnailModal}
+                    onOpenChange={setShowAddThubnailModal}
+                    onSave={handleSaveThumbnail}
+                />
+            }
+
+
+            {showAdvanceSettingModal &&
+                <ArticleAdvancedSettingModal
+                    open={showAdvanceSettingModal}
+                    onOpenChange={setShowAdvanceSettingModal}
+                    onSave={handleSaveThumbnail}
+                />
+            }
 
 
         </>

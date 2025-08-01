@@ -4,7 +4,7 @@ import { Loader2 } from 'lucide-react';
 
 interface PrimaryOutlineButtonProps {
     children: React.ReactNode;
-    onClick: () => void;
+    onClick?: () => void;
     disabled?: boolean;
     loading?: boolean;
     variant?: 'info' | 'success' | 'warning' | 'danger' | 'primary';
@@ -46,7 +46,7 @@ const PrimaryOutlineButton: React.FC<PrimaryOutlineButtonProps> = ({
     const isDisabled = disabled || loading;
 
     const handleClick = () => {
-        if (!isDisabled) {
+        if (!isDisabled && onClick) {
             onClick();
         }
     };

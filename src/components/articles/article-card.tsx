@@ -78,7 +78,7 @@ export function ArticleCard({
                                 }}
                             >
                                 <Image
-                                    src={'/Icons/ActionThreeDots.png'}
+                                    src={'/icons/ActionThreeDots.png'}
                                     alt={'ActionThreeDots'}
                                     height={24}
                                     width={24}

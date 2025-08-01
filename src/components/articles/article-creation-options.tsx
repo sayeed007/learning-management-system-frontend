@@ -21,7 +21,7 @@ export function ArticleCreationOptions() {
 
     const [currentArticleWrittingMethod, setCurrentArticleWrittingMethod] = useState<'root' | 'scratch'>('root')
     const [showAddThumbnailModal, setShowAddThubnailModal] = useState(false);
-    const [showAdvanceSettingModal, setShowAdvanceSettingModal] = useState(true);
+    const [showAdvanceSettingModal, setShowAdvanceSettingModal] = useState(false);
 
 
     const handleStartFromScratch = () => {
@@ -85,9 +85,6 @@ export function ArticleCreationOptions() {
         router.push(url);
     };
 
-
-    console.log(showMorePopup);
-
     return (
         <>
             {/* Header */}
@@ -140,11 +137,11 @@ export function ArticleCreationOptions() {
                                 variant="ghost"
                                 size="sm"
                                 onClick={(e) => {
-                                    e.preventDefault()
-                                    e.stopPropagation()
+                                    e.preventDefault();
+                                    e.stopPropagation();
                                     setShowMorePopup(prev => {
                                         return !prev
-                                    })
+                                    });
                                 }}
                                 className="cursor-pointer bg-background text-info border-1 border-info px-6 py-2 rounded-lg font-medium shadow-drop hover:bg-info/90 hover:text-white transition"
                             >

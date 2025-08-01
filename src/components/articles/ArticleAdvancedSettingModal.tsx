@@ -46,7 +46,7 @@ export function ArticleAdvancedSettingModal({
                 <div className="flex flex-col gap-6 mb-8">
                     <div className="flex items-center gap-4">
                         <Image
-                            src={'/Icons/Rating.png'}
+                            src={'/icons/Rating.png'}
                             alt="Rating"
                             width={48}
                             height={48}
@@ -64,7 +64,7 @@ export function ArticleAdvancedSettingModal({
                     </div>
                     <div className="flex items-center gap-4">
                         <Image
-                            src={'/Icons/Comments.png'}
+                            src={'/icons/Comments.png'}
                             alt="Comments"
                             width={48}
                             height={48}
@@ -81,7 +81,7 @@ export function ArticleAdvancedSettingModal({
                     </div>
                     <div className="flex items-center gap-4">
                         <Image
-                            src={'/Icons/ArticleViews.png'}
+                            src={'/icons/ArticleViews.png'}
                             alt="ArticleViews"
                             width={48}
                             height={48}
@@ -98,7 +98,7 @@ export function ArticleAdvancedSettingModal({
                     </div>
                     <div className="flex items-center gap-4">
                         <Image
-                            src={'/Icons/ArticleExport.png'}
+                            src={'/icons/ArticleExport.png'}
                             alt="ArticleExport"
                             width={48}
                             height={48}

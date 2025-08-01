@@ -135,3 +135,36 @@ export interface Article {
   };
   comments: Comment[];
 }
+
+
+// types/index.ts
+export interface QuestionChoice {
+  id: string
+  text: string
+  isCorrect: boolean
+}
+
+export interface Question {
+  id: string
+  type: 'single-choice' | 'multiple-choice' | 'descriptive' | 'question-bank'
+  text: string
+  choices: QuestionChoice[]
+  score: number
+  timeLimit: number
+  required: boolean
+}
+
+export interface Section {
+  id: string
+  title: string
+  description?: string
+  questions: Question[]
+}
+
+
+export interface CourseDummyData {
+  id: string;
+  title: string;
+  description: string;
+  sections: Section[];
+}

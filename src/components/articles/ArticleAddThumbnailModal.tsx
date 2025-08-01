@@ -58,7 +58,7 @@ export function ArticleAddThumbnailModal({ open, onOpenChange, onSave }: { open:
                                     onClick={handleRemove}
                                 >
                                     <Image
-                                        src={'/Icons/Delete.png'}
+                                        src={'/icons/Delete.png'}
                                         alt="Delete"
                                         width={24}
                                         height={24}

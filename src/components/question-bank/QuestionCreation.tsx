@@ -1,11 +1,9 @@
 // components/questionBanks/questionBank-creation-options.tsx
 "use client"
-import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useState } from "react"
 import { GoBackRoute } from "../reports/GoBackRoute"
-import RichTextEditor from "../RichTextEditor"
 import { Input } from "../ui/input"
 import PrimaryActionButton from "../ui/PrimaryButton"
 import PrimaryOutlineButton from "../ui/PrimaryOutlineButton"
@@ -15,26 +13,9 @@ export function QuestionCreation() {
     const router = useRouter()
     const searchParams = useSearchParams()
     const [questionBankName, setquestionBankName] = useState<string>(searchParams.get('name') || '');
-    const [showMorePopup, setShowMorePopup] = useState<boolean>(false);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [questionBankContent, setquestionBankContent] = useState('');
-
-    const [currentquestionBankWrittingMethod, setCurrentquestionBankWrittingMethod] = useState<'root' | 'scratch'>('root')
-    const [showAddThumbnailModal, setShowAddThubnailModal] = useState(false);
-    const [showAdvanceSettingModal, setShowAdvanceSettingModal] = useState(false);
     const [showSettingsPopup, setShowSettingsPopup] = useState(false);
-
-    const handleStartFromScratch = () => {
-        // router.push(`/questionBanks/edit?name=${encodeURIComponent(questionBankName)}&mode=scratch`);
-        setCurrentquestionBankWrittingMethod('scratch');
-    }
-
-    const handleReadyTemplate = () => {
-        router.push(`/questionBanks/edit?name=${encodeURIComponent(questionBankName)}&mode=template`)
-    }
-
-    const handleImportFile = () => {
-        router.push(`/questionBanks/edit?name=${encodeURIComponent(questionBankName)}&mode=import`)
-    }
 
     const handlePreview = () => {
         if (!questionBankName.trim() || !questionBankContent.trim()) {
@@ -57,6 +38,7 @@ export function QuestionCreation() {
 
     };
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleSaveSettings = (settings: any) => {
         console.log('Settings saved:', settings)
         // Handle the settings data here

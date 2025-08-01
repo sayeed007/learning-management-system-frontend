@@ -21,6 +21,7 @@ interface QuestionEditorProps {
     onDelete: (id: string) => void
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function QuestionEditor({ question, onUpdate, onDelete }: QuestionEditorProps) {
     const [localQuestion, setLocalQuestion] = useState<Question>(question)
 
@@ -48,10 +49,10 @@ export function QuestionEditor({ question, onUpdate, onDelete }: QuestionEditorP
         updateQuestion({ choices: updatedChoices })
     }
 
-    const deleteChoice = (choiceId: string) => {
-        const updatedChoices = localQuestion.choices.filter(choice => choice.id !== choiceId)
-        updateQuestion({ choices: updatedChoices })
-    }
+    // const deleteChoice = (choiceId: string) => {
+    //     const updatedChoices = localQuestion.choices.filter(choice => choice.id !== choiceId)
+    //     updateQuestion({ choices: updatedChoices })
+    // }
 
     const setCorrectAnswer = (choiceId: string) => {
         if (localQuestion.type === 'single-choice') {

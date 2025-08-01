@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 import { Button } from '@/components/ui/button';
 import { Loader2 } from 'lucide-react';
 
 interface PrimaryOutlineButtonProps {
     children: React.ReactNode;
-    onClick?: () => void;
+    onClick?: ((e?: React.MouseEvent) => void) | (() => void);
     disabled?: boolean;
     loading?: boolean;
     variant?: 'info' | 'success' | 'warning' | 'danger' | 'primary';
@@ -45,9 +45,9 @@ const PrimaryOutlineButton: React.FC<PrimaryOutlineButtonProps> = ({
     // Disabled state
     const isDisabled = disabled || loading;
 
-    const handleClick = () => {
+    const handleClick = (e: React.MouseEvent) => {
         if (!isDisabled && onClick) {
-            onClick();
+            onClick(e);
         }
     };
 

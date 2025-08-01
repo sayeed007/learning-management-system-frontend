@@ -158,10 +158,10 @@ export function SettingsPopup({
                 <h3 className="text-base font-bold text-gray-900">Quiz attempt time</h3>
                 <CustomSelect
                     options={quizAttemptOptions}
-                    value={quizAttemptOptions.find(option => option.value === quizAttemptTime)}
+                    value={quizAttemptTime}
                     onChange={(selectedOption) => {
                         if (selectedOption) {
-                            setQuizAttemptTime(selectedOption.value)
+                            setQuizAttemptTime(selectedOption)
                         }
                     }}
                     placeholder="Select attempt limit"

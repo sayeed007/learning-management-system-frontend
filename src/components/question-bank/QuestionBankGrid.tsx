@@ -1,10 +1,9 @@
 // src\components\question-bank\QuestionBankGrid.tsx
 "use client"
 
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import PrimaryActionButton from "../ui/PrimaryButton";
 import { courseQuestionData } from "@/dummyData/courseQuestionData";
+import { useRouter } from "next/navigation";
+import PrimaryActionButton from "../ui/PrimaryButton";
 import { QuestionBankCard } from "./QuestionBankCard";
 
 // Sample data - replace with your actual data source

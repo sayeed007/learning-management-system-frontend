@@ -1,15 +1,14 @@
-// components/articles/articles-grid.tsx
+// src\components\question-bank\QuestionBankGrid.tsx
 "use client"
 
-import { dummyArticles } from "@/dummyData/articles";
-import { useState } from "react";
-import { ArticleCard } from "./article-card";
-import { CreateArticleModal } from "./create-article-modal";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import PrimaryActionButton from "../ui/PrimaryButton";
+import { courseQuestionData } from "@/dummyData/courseQuestionData";
+import { QuestionBankCard } from "./QuestionBankCard";
 
 // Sample data - replace with your actual data source
-const sampleQuestionBank = [];
+const sampleQuestionBank = [...courseQuestionData];
 
 // Define the props interface
 interface QuestionBankGridProps {
@@ -25,23 +24,22 @@ const QuestionBankGrid: React.FC<QuestionBankGridProps> = ({
     handleCreateNewQuestion
 }) => {
     const router = useRouter()
-    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)
 
-    const filteredQuestionBank = sampleQuestionBank.filter((article) => {
-        // Check if article matches the activeTab condition
-        const matchesTab = activeTab === "my" ? article.myArticle : true;
+    const filteredQuestionBank = sampleQuestionBank.filter((questionBank) => {
+        // Check if questionBank matches the activeTab condition
+        const matchesTab = activeTab === "my" ? questionBank.isMyCourse : true;
 
-        // Check if article matches the searchQuery (case-insensitive)
+        // Check if questionBank matches the searchQuery (case-insensitive)
         const matchesSearch = searchQuery
-            ? article.author.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            article.title.toLowerCase().includes(searchQuery.toLowerCase())
+            ? questionBank.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            questionBank.description.toLowerCase().includes(searchQuery.toLowerCase())
             : true;
 
         // Return true only if both conditions are met
         return matchesTab && matchesSearch;
     });
 
-
+    console.log(filteredQuestionBank);
 
     return (
         <div className="py-6">
@@ -58,22 +56,14 @@ const QuestionBankGrid: React.FC<QuestionBankGridProps> = ({
 
             {/* QuestionBank Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
-                {filteredQuestionBank.map((article) => (
-                    <ArticleCard
-                        key={article.id}
-                        article={article}
-                        isMyArticle={activeTab === 'my'}
-                        onClick={() => {
-                            router.push(`/question-bank/${encodeURIComponent(article?.title)}`)
-                        }}
+                {filteredQuestionBank.map((questionBank) => (
+                    <QuestionBankCard
+                        key={questionBank.id}
+                        questionBank={questionBank}
+                        onClick={() => { router.push(`/question-bank/courses/${questionBank.id}/preview`) }}
                     />
                 ))}
             </div>
-
-            <CreateArticleModal
-                isOpen={isCreateModalOpen}
-                onClose={() => setIsCreateModalOpen(false)}
-            />
         </div>
     )
 }

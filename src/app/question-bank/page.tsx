@@ -18,13 +18,12 @@ export default function QuestionBankPage() {
     useEffect(() => {
         // For demo purposes, set to true to show the grid
         // Set to false to show empty state
-        setHasQuestions(false);
+        setHasQuestions(true);
     }, []);
 
 
     const handleCreateNewQuestion = () => {
-        router.push(`/question-bank/create`);
-
+        router.push(`/question-bank/courses/${1}/sections/${1}/questions`);
     };
 
     return (
@@ -36,7 +35,7 @@ export default function QuestionBankPage() {
                 setSearchQuery={setSearchQuery}
             />
 
-            {/* {hasQuestions ?
+            {hasQuestions ?
                 <QuestionBankGrid
                     activeTab={activeTab}
                     searchQuery={searchQuery}
@@ -49,13 +48,8 @@ export default function QuestionBankPage() {
                     buttonText="Create Now"
                     onClick={handleCreateNewQuestion}
                 />
-            } */}
-            <EmptyStateWithCreate
-                message="No question to show"
-                description="Questions you’ve created will show up here."
-                buttonText="Create Now"
-                onClick={handleCreateNewQuestion}
-            />
+            }
+
         </>
     )
 }

@@ -1,3 +1,6 @@
+import { getInitials } from "@/lib/utils";
+import { Author } from "@/types";
+
 export interface QuestionChoice {
   id: string;
   text: string;
@@ -26,13 +29,26 @@ export interface Course {
   title: string;
   description: string;
   sections: Section[];
+  isPublished: boolean;
+  isMyCourse: boolean;
+  author: Author;
 }
+
+const placeholderImageURL = process.env.NEXT_PUBLIC_DEFAULT_AVATAR_URL || "https://picsum.photos/300/200?random=";
+
 
 export const courseQuestionData: Course[] = [
   {
     id: "course1",
     title: "Introduction to General Knowledge",
-    description: "A comprehensive course covering a wide range of topics to enhance your general awareness.",
+    description: "Embark on a journey to broaden your understanding of the world with this comprehensive course designed to enhance your general awareness. Explore diverse topics including world geography, historical events, cultural diversity, science, technology, arts, and literature. This course offers engaging quizzes and in-depth questions to test and expand your knowledge across multiple disciplines. Perfect for learners seeking to develop a well-rounded perspective, it covers essential facts, historical milestones, cultural traditions, and scientific principles to foster intellectual curiosity and informed decision-making in an interconnected global society.",
+    isPublished: false,
+    isMyCourse: true,
+    author: {
+          name: "Sufain Huzaif",
+          avatar: `${placeholderImageURL}1`,
+          initials: getInitials("Sufain Huzaif"),
+        },
     sections: [
       {
         id: "sec1-1",
@@ -796,7 +812,14 @@ export const courseQuestionData: Course[] = [
   {
     id: "course2",
     title: "Science Fundamentals",
-    description: "Dive into the basics of physics, chemistry, and biology.",
+    description: "Dive into the fascinating world of science with this comprehensive course covering the essentials of physics, chemistry, and biology. Explore fundamental concepts such as motion, forces, atomic structure, chemical reactions, and the principles of life. Through engaging quizzes and thought-provoking questions, learners will gain a solid understanding of scientific principles that govern the natural world. This course delves into topics like energy conservation, the structure of matter, ecosystems, and the scientific method, fostering critical thinking and a deeper appreciation for the interconnectedness of physical and biological systems in our universe.",
+    isPublished: true,
+    isMyCourse: false,
+    author: {
+              name: "James P. Chandra",
+              avatar: `${placeholderImageURL}James_P_Chandra`,
+              initials: getInitials("James P. Chandra"),
+            },
     sections: [
       {
         id: "sec2-1",
@@ -1669,7 +1692,14 @@ export const courseQuestionData: Course[] = [
   {
     id: "course3",
     title: "Literature and Culture",
-    description: "Explore classic and modern works of literature and their cultural impact.",
+    description: "Immerse yourself in the rich tapestry of classic and modern literature with this course, designed to explore their profound cultural impact. Study timeless works from authors like Shakespeare and Austen, alongside contemporary masterpieces that shape global perspectives. Through in-depth quizzes and analytical questions, examine themes, historical contexts, and societal influences embedded in literature. This course covers epic poetry, novels, and cultural narratives, offering insights into how stories reflect and shape human experiences across diverse cultures and eras.",
+    isPublished: true,
+    isMyCourse: false,
+    author: {
+          name: "Aisha Khan",
+          avatar: `${placeholderImageURL}2`,
+          initials: getInitials("Aisha Khan"),
+        },
     sections: [
       {
         id: "sec3-1",
